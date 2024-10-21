@@ -49,10 +49,5 @@ namespace orsapr
         {
 
         }
-
-        private void label11_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

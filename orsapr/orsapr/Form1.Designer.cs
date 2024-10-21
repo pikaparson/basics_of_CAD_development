@@ -57,7 +57,7 @@
             this.button1.Location = new System.Drawing.Point(203, 176);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 36);
+            this.button1.Size = new System.Drawing.Size(195, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Построить";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@
             this.textBox1.Location = new System.Drawing.Point(203, 34);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(112, 22);
+            this.textBox1.Size = new System.Drawing.Size(193, 22);
             this.textBox1.TabIndex = 1;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
@@ -82,7 +82,7 @@
             this.textBox2.Location = new System.Drawing.Point(203, 63);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(112, 22);
+            this.textBox2.Size = new System.Drawing.Size(193, 22);
             this.textBox2.TabIndex = 2;
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
@@ -90,11 +90,11 @@
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.BackColor = System.Drawing.Color.White;
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.textBox3.Location = new System.Drawing.Point(203, 90);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(112, 22);
+            this.textBox3.Size = new System.Drawing.Size(193, 22);
             this.textBox3.TabIndex = 3;
             // 
             // textBox4
@@ -105,7 +105,7 @@
             this.textBox4.Location = new System.Drawing.Point(203, 118);
             this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(112, 22);
+            this.textBox4.Size = new System.Drawing.Size(193, 22);
             this.textBox4.TabIndex = 4;
             // 
             // textBox5
@@ -115,7 +115,7 @@
             this.textBox5.Location = new System.Drawing.Point(203, 146);
             this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(112, 22);
+            this.textBox5.Size = new System.Drawing.Size(193, 22);
             this.textBox5.TabIndex = 5;
             // 
             // label1
@@ -177,7 +177,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(321, 38);
+            this.label6.Location = new System.Drawing.Point(403, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(110, 16);
             this.label6.TabIndex = 11;
@@ -187,7 +187,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(321, 66);
+            this.label7.Location = new System.Drawing.Point(403, 65);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(110, 16);
             this.label7.TabIndex = 12;
@@ -197,7 +197,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(321, 95);
+            this.label8.Location = new System.Drawing.Point(403, 94);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(96, 16);
             this.label8.TabIndex = 13;
@@ -207,7 +207,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(321, 123);
+            this.label9.Location = new System.Drawing.Point(403, 122);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(110, 16);
             this.label9.TabIndex = 14;
@@ -217,7 +217,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(321, 150);
+            this.label10.Location = new System.Drawing.Point(403, 149);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(96, 16);
             this.label10.TabIndex = 15;
@@ -225,14 +225,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Location = new System.Drawing.Point(13, 218);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.MaximumSize = new System.Drawing.Size(556, 105);
-            this.groupBox1.MinimumSize = new System.Drawing.Size(556, 105);
+            this.groupBox1.Location = new System.Drawing.Point(37, 218);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(556, 105);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(497, 151);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Предупреждения";
@@ -243,17 +244,16 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(7, 19);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(503, 32);
+            this.label11.Size = new System.Drawing.Size(414, 32);
             this.label11.TabIndex = 0;
-            this.label11.Text = "Длина сиденья: введены значения, не входящие в границы (от 300 до 400 мм)\r\nВысота" +
-    " ножек: не введено значение";
-            this.label11.Click += new System.EventHandler(this.label11_Click_1);
+            this.label11.Text = "Пустое поле: \"Высота ножек\"\r\nНеправильное значение: \"Длина сиденья\", \"Толщина сид" +
+    "енья\"\r\n";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 333);
+            this.ClientSize = new System.Drawing.Size(567, 382);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -273,8 +273,6 @@
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(600, 380);
-            this.MinimumSize = new System.Drawing.Size(600, 380);
             this.Name = "Form1";
             this.Text = "Табурет";
             this.Load += new System.EventHandler(this.Form1_Load);

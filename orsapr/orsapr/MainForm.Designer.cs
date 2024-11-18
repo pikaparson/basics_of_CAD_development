@@ -1,6 +1,6 @@
 ﻿namespace orsapr
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -54,26 +54,26 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(167, 126);
+            this.button1.Location = new System.Drawing.Point(167, 127);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(84, 29);
             this.button1.TabIndex = 0;
             this.button1.Text = "Построить";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Location = new System.Drawing.Point(167, 21);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(85, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_OnChanged);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
             // textBox2
             // 
@@ -84,7 +84,8 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(85, 20);
             this.textBox2.TabIndex = 2;
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_OnChanged);
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
             // textBox3
             // 
@@ -96,17 +97,21 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(85, 20);
             this.textBox3.TabIndex = 3;
+            this.textBox3.TextChanged += new System.EventHandler(this.TextBox3_OnChanged);
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.textBox4.BackColor = System.Drawing.Color.White;
             this.textBox4.Location = new System.Drawing.Point(167, 84);
             this.textBox4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(85, 20);
             this.textBox4.TabIndex = 4;
+            this.textBox4.TextChanged += new System.EventHandler(this.TextBox4_OnChanged);
+            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
             // textBox5
             // 
@@ -117,6 +122,8 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(85, 20);
             this.textBox5.TabIndex = 5;
+            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5_OnChanged);
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
             // label1
             // 
@@ -165,7 +172,6 @@
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "Высота ножек";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -245,7 +251,6 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Предупреждения";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label11
             // 
@@ -253,17 +258,14 @@
             this.label11.Location = new System.Drawing.Point(5, 16);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(407, 26);
+            this.label11.Size = new System.Drawing.Size(0, 13);
             this.label11.TabIndex = 0;
-            this.label11.Text = "Длина сиденья: введены значения, не входящие в границы (от 300 до 400 мм)\r\nВысота" +
-    " ножек: не введено значение";
-            this.label11.Click += new System.EventHandler(this.label11_Click_1);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 274);
+            this.ClientSize = new System.Drawing.Size(436, 271);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -283,11 +285,10 @@
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.MaximumSize = new System.Drawing.Size(453, 313);
-            this.MinimumSize = new System.Drawing.Size(453, 313);
-            this.Name = "Form1";
+            this.MaximumSize = new System.Drawing.Size(452, 310);
+            this.MinimumSize = new System.Drawing.Size(452, 310);
+            this.Name = "MainForm";
             this.Text = "Табурет";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

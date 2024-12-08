@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using orsapr.Wrapper;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -85,19 +86,19 @@ namespace orsapr
             ClearError(textBoxName); // Дублируем вызов для завершения удаления предыдущих ошибок
             switch (textBoxName)
             {
-                case "textBox1":
+                case "Длина сиденья":
                     _parameters.SeatLength = value;
                     break;
-                case "textBox2":
+                case "Ширина сиденья":
                     _parameters.SeatWidth = value;
                     break;
-                case "textBox3":
+                case "Толщина сиденья":
                     _parameters.SeatThickness = value;
                     break;
-                case "textBox4":
+                case "Высота ножек":
                     _parameters.LegLength = value;
                     break;
-                case "textBox5":
+                case "Ширина и длина ножек":
                     _parameters.LegWidth = value;
                     break;
             }
@@ -202,5 +203,17 @@ namespace orsapr
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.BackColor == SystemColors.Window &&
+                textBox2.BackColor == SystemColors.Window &&
+                textBox3.BackColor == SystemColors.Window &&
+                textBox4.BackColor == SystemColors.Window &&
+                textBox5.BackColor == SystemColors.Window)
+            {
+                Wrapper.Wrapper wrapper = new Wrapper.Wrapper();
+                wrapper.Build(_parameters);
+            }
+        }
     }
 }

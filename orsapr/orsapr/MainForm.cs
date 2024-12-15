@@ -9,8 +9,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using orsapr.Wrapper;
+using Logic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace orsapr
@@ -261,8 +263,8 @@ namespace orsapr
             if (_errorMessages.Length == 0)
             {
                 // Если ошибок нет, продолжаем основную логику
-                Wrapper.Wrapper wrapper = new Wrapper.Wrapper();
-                wrapper.Build(_parameters);
+                Builder builder = new Builder();
+                builder.BuildChair(_parameters);
             }
             else
             {

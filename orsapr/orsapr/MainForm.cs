@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
@@ -84,6 +85,7 @@ namespace orsapr
 
             // Если всё хорошо, устанавливаем значения в параметры
             ClearError(textBoxName); // Дублируем вызов для завершения удаления предыдущих ошибок
+            
             switch (textBoxName)
             {
                 case "Длина сиденья":
@@ -102,6 +104,8 @@ namespace orsapr
                     _parameters.LegWidth = value;
                     break;
             }
+
+            if (textBoxName == "Толщина сиденья" || textBoxName == "Высота ножек") ValidateDependentParameters();
         }
 
         // Установить ошибку
@@ -119,7 +123,16 @@ namespace orsapr
         // Очистить ошибку
         private void ClearError(string textBoxName)
         {
-            string errorMessage = $"{textBoxName}: ";
+            string errorMessage;
+            if (textBoxName == "Зависимые параметры")
+            {
+                errorMessage = $"Сумма";
+            }
+            else
+            {
+                errorMessage = $"{textBoxName}: ";
+            }
+
             string[] lines = _errorMessages.ToString().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             _errorMessages.Clear();
 
@@ -136,11 +149,33 @@ namespace orsapr
             // Проверка на наличие ошибок
             if (_errorMessages.Length == 0)
             {
-                label11.Text = string.Empty; 
+                label11.Text = string.Empty;
             }
 
             // Устанавливаем цвет текстового поля на стандартный
             ResetColor(textBoxName);
+        }
+
+        // Метод для проверки зависимых параметров
+        private void ValidateDependentParameters()
+        {
+            // Сбрасываем цвет полей ввода для обновления
+            ResetColor("Толщина сиденья");
+            ResetColor("Высота ножек");
+
+            if (_parameters.SeatThickness > 0 && _parameters.LegLength > 0) // Убедитесь, что значения установлены
+            {
+                if (!_parameters.CheckDependentParametersValue())
+                {
+                    SetError("Зависимые параметры", "Сумма толщины сиденья и длины ножки должна быть не менее 330.");
+                    SetColors("Зависимые параметры");
+                }
+                else
+                {
+                    ClearError("Зависимые параметры");
+                }
+            }
+
         }
 
         // Обновить строку ошибок
@@ -169,6 +204,10 @@ namespace orsapr
                 case "Ширина и длина ножек":
                     textBox5.BackColor = Color.LightCoral;
                     break;
+                case "Зависимые параметры":
+                    textBox3.BackColor = Color.LightCoral;
+                    textBox4.BackColor = Color.LightCoral;
+                    break;
             }
         }
         // Метод, который сбрасывает цвет текстового поля на стандартный
@@ -191,6 +230,10 @@ namespace orsapr
                 case "Ширина и длина ножек":
                     textBox5.BackColor = SystemColors.Window;
                     break;
+                case "Зависимые параметры":
+                    textBox3.BackColor = SystemColors.Window;
+                    textBox4.BackColor = SystemColors.Window;
+                    break;
             }
         }
 
@@ -205,14 +248,26 @@ namespace orsapr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.BackColor == SystemColors.Window &&
-                textBox2.BackColor == SystemColors.Window &&
-                textBox3.BackColor == SystemColors.Window &&
-                textBox4.BackColor == SystemColors.Window &&
-                textBox5.BackColor == SystemColors.Window)
+            // Сначала очищаем все предыдущие сообщения об ошибках
+            _errorMessages.Clear();
+
+            // Проводим валидацию каждого текстового поля
+            ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
+            ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
+            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+            ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
+            ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+
+            if (_errorMessages.Length == 0)
             {
+                // Если ошибок нет, продолжаем основную логику
                 Wrapper.Wrapper wrapper = new Wrapper.Wrapper();
                 wrapper.Build(_parameters);
+            }
+            else
+            {
+                // Если есть ошибки, обновляем метку ошибок
+                UpdateErrorLabel();
             }
         }
     }

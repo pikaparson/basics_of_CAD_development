@@ -9,18 +9,22 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using API_singly;
 using Logic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 using TextBox = System.Windows.Forms.TextBox;
-
+ 
 namespace orsapr
 {
     public partial class MainForm : Form
     {
         private Parameters _parameters;
         private StringBuilder _errorMessages;
+
+        private int _minLegLength = 300;
+        private int _minSeatThickness = 20;
 
         public MainForm()
         {
@@ -44,13 +48,13 @@ namespace orsapr
         // Метод для проверки значения textBox3
         private void TextBox3_OnChanged(object sender, EventArgs e)
         {
-            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+            ValidateAndSetValue(textBox3, _minSeatThickness, 35, "Толщина сиденья");
         }
 
         // Метод для проверки значения textBox4
         private void TextBox4_OnChanged(object sender, EventArgs e)
         {
-            ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
+            ValidateAndSetValue(textBox4, _minLegLength, 400, "Высота ножек");
         }
 
         // Метод для проверки значения textBox5
@@ -68,6 +72,14 @@ namespace orsapr
             {
                 // Добавляем ошибку о пустом поле
                 SetError(textBoxName, $"{textBoxName}: поле не должно быть пустым.");
+                
+                if (textBox3.Text == "" & textBox4.Text == "") {
+                    _minLegLength = 300;
+                    _minSeatThickness = 20;
+                    label9.Text = $"от {_minLegLength} до 400 мм";
+                    label8.Text = $"от {_minSeatThickness} до 35 мм";
+                }
+                
                 return;
             }
 
@@ -98,9 +110,19 @@ namespace orsapr
                     break;
                 case "Толщина сиденья":
                     _parameters.SeatThickness = value;
+
+                    if (330 - value < 300) _minLegLength = 300;
+                    else _minLegLength = 330 - value;
+
+                    label9.Text = $"от {_minLegLength} до 400 мм";
                     break;
                 case "Высота ножек":
                     _parameters.LegLength = value;
+
+                    if(330 - value < 20) _minSeatThickness = 20;
+                    else _minSeatThickness = 330 - value;
+
+                    label8.Text = $"от {_minSeatThickness} до 35 мм";
                     break;
                 case "Ширина и длина ножек":
                     _parameters.LegWidth = value;

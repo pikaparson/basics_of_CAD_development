@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using KompasAPI7;
 using Logic;
 
-namespace Logic
+namespace API_singly
 {
     public class Builder
     {

@@ -69,6 +69,16 @@ namespace LogicTests
             parameters.LegLength = 300;
 
             Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(true));
+
+            parameters.SeatThickness = 21;
+            parameters.LegLength = 309;
+
+            Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(true));
+
+            parameters.SeatThickness = 20;
+            parameters.LegLength = 300;
+
+            Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(false));
         }
     }
 }

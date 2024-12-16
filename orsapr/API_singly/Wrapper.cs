@@ -4,7 +4,7 @@ using KompasAPI7;
 using Kompas6Constants;
 using Kompas6Constants3D;
 
-namespace Logic
+namespace API_singly
 {
     public class Wrapper
     {

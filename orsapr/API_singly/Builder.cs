@@ -26,7 +26,11 @@ namespace API_singly
         private void BuildSeat(IPart7 part, Parameters parameters)
         {
             ISketch sketch = _wrapper.CreateSketch(part, "Эскиз: сидушка");
-            _wrapper.CreateRectangle(sketch, 0, 0, parameters.SeatWidth, parameters.SeatLength);
+            int centerX = parameters.SeatWidth / 2;
+            int centerY = parameters.SeatLength / 2;
+            int radiusX = parameters.SeatWidth / 2;
+            int radiusY = parameters.SeatLength / 2;
+
             _wrapper.ExtrudeSketch(sketch, parameters.SeatThickness, "Сидушка", false);
         }
 

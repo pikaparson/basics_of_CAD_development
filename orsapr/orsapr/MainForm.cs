@@ -18,6 +18,7 @@ using TextBox = System.Windows.Forms.TextBox;
  
 namespace orsapr
 {
+
     public partial class MainForm : Form
     {
         private Parameters _parameters;
@@ -25,12 +26,18 @@ namespace orsapr
 
         private int _minLegLength = 300;
         private int _minSeatThickness = 20;
+        private LegTypes _legsType = LegTypes.SquareLeg;
+        private SeatTypes _seatType = SeatTypes.SquareSeat;
 
         public MainForm()
         {
             InitializeComponent();
-            _parameters = new Parameters();
-            _errorMessages = new StringBuilder();
+                _parameters = new Parameters();
+                _errorMessages = new StringBuilder();
+                comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+                comboBox1.SelectedIndex = 0;
+                comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+                comboBox2.SelectedIndex = 0;
         }
 
         // Метод для проверки значения textBox1
@@ -294,5 +301,40 @@ namespace orsapr
                 UpdateErrorLabel();
             }
         }
+
+        private void SeatTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    {
+                        _seatType = SeatTypes.SquareSeat;
+                        break;
+                    }
+                case 1:
+                    {
+                        _seatType = SeatTypes.RoundSeat;
+                        break;
+                    }
+            }
+        }
+
+        private void LegsTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox2.SelectedIndex)
+            {
+                case 0:
+                    {
+                        _legsType = LegTypes.SquareLeg;
+                        break;
+                    }
+                case 1:
+                    {
+                        _legsType = LegTypes.RoundLeg;
+                        break;
+                    }
+            }
+        }
+
     }
 }

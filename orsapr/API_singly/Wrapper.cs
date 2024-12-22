@@ -55,6 +55,23 @@ namespace API_singly
             sketch.EndEdit();
         }
 
+        public void CreateCircle(ISketch sketch, int x, int y, int diameter)
+        {
+            IKompasDocument documentSketch = sketch.BeginEdit();
+            IKompasDocument2D document2D = (IKompasDocument2D)documentSketch;
+            IViewsAndLayersManager viewsAndLayersManager = document2D.ViewsAndLayersManager;
+            IView view = viewsAndLayersManager.Views.ActiveView;
+            IDrawingContainer drawingContainer = (IDrawingContainer)view;
+
+            ICircle circle = drawingContainer.Circles.Add();
+            circle.Style = (int)Kompas6Constants.ksCurveStyleEnum.ksCSNormal;
+            circle.Xc = x;
+            circle.Yc = y;
+            circle.Radius = diameter / 2;
+            circle.Update();
+            sketch.EndEdit();
+        }
+
         public void ExtrudeSketch(ISketch sketch, double depth, string name, bool draftOutward)
         {
             var part = sketch.Part;

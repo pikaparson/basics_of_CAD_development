@@ -306,14 +306,46 @@ namespace orsapr
         {
             switch (comboBox1.SelectedIndex)
             {
-                case 0:
+                case 0: // Первый элемент (Длина)
                     {
                         _seatType = SeatTypes.SquareSeat;
+
+                        // Изменяем параметры для первого элемента
+                        groupBox2.Size = new Size(556, 136);
+                        label1.Text = "Длина";
+                        label5.Visible = true;
+                        label7.Visible = true;
+                        textBox2.Visible = true;
+                        textBox2.Enabled = true;
+
+                        label3.Location = new Point(103, 105);
+                        textBox3.Location = new Point(199, 102);
+                        label8.Location = new Point(318, 106);
+                        groupBox3.Location = new Point(9, 159);
+                        groupBox1.Location = new Point(9, 281);
+                        button1.Location = new Point(222, 392);
+
                         break;
                     }
-                case 1:
+                case 1: // Второй элемент (Диаметр)
                     {
                         _seatType = SeatTypes.RoundSeat;
+
+                        // Изменяем параметры для второго элемента
+                        groupBox2.Size = new Size(556, 104);
+                        label1.Text = "Диаметр";
+                        label5.Visible = false;
+                        label7.Visible = false;
+                        textBox2.Visible = false;
+                        textBox2.Enabled = false;
+
+                        label3.Location = new Point(103, 79);
+                        textBox3.Location = new Point(199, 76);
+                        label8.Location = new Point(318, 80);
+                        groupBox3.Location = new Point(9, 127);
+                        groupBox1.Location = new Point(9, 249);
+                        button1.Location = new Point(222, 359);
+
                         break;
                     }
             }

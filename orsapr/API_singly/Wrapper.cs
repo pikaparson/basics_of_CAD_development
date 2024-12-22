@@ -6,11 +6,19 @@ using Kompas6Constants3D;
 
 namespace API_singly
 {
+    /// <summary>
+    /// Обертка для взаимодействия с API Kompas
+    /// </summary>
     public class Wrapper
     {
+        /// <summary>
+        /// Объект API для работы с Kompas
+        /// </summary>
         private IKompasAPIObject _kompas;
 
-
+        /// <summary>
+        /// Метод для открытия CAD-приложения
+        /// </summary>
         public void OpenCad()
         {
             Type t = Type.GetTypeFromProgID("KOMPAS.Application.7");
@@ -18,6 +26,10 @@ namespace API_singly
             _kompas.Application.Visible = true;
         }
 
+        /// <summary>
+        /// Метод для создания части в 3D документе
+        /// </summary>
+        /// <returns>Возвращает созданную часть</returns>
         public IPart7 CreatePart()
         {
             _kompas.Application.Documents.Add(DocumentTypeEnum.ksDocumentPart);
@@ -25,6 +37,12 @@ namespace API_singly
             return document3d.TopPart;
         }
 
+        /// <summary>
+        /// Метод для создания эскиза на заданной части
+        /// </summary>
+        /// <param name="part">Часть, к которой добавляется эскиз</param>
+        /// <param name="name">Имя создаваемого эскиза</param>
+        /// <returns>Созданный эскиз</returns>
         public ISketch CreateSketch(IPart7 part, string name)
         {
             IModelContainer modelContainer = (IModelContainer)part;
@@ -37,6 +55,14 @@ namespace API_singly
             return sketch;
         }
 
+        /// <summary>
+        /// Метод для создания прямоугольника в эскизе
+        /// </summary>
+        /// <param name="sketch">Эскиз, в который добавляется прямоугольник</param>
+        /// <param name="x">Координата X начальной точки</param>
+        /// <param name="y">Координата Y начальной точки</param>
+        /// <param name="width">Ширина прямоугольника</param>
+        /// <param name="height">Высота прямоугольника</param>
         public void CreateRectangle(ISketch sketch, int x, int y, int width, int height)
         {
             IKompasDocument documentSketch = sketch.BeginEdit();
@@ -55,6 +81,13 @@ namespace API_singly
             sketch.EndEdit();
         }
 
+        /// <summary>
+        /// Метод для создания круга в эскизе
+        /// </summary>
+        /// <param name="sketch">Эскиз, в который добавляется круг</param>
+        /// <param name="x">Координата X центра круга</param>
+        /// <param name="y">Координата Y центра круга</param>
+        /// <param name="diameter">Диаметр круга</param>
         public void CreateCircle(ISketch sketch, int x, int y, int diameter)
         {
             IKompasDocument documentSketch = sketch.BeginEdit();
@@ -72,6 +105,13 @@ namespace API_singly
             sketch.EndEdit();
         }
 
+        /// <summary>
+        /// Метод для экструзии эскиза
+        /// </summary>
+        /// <param name="sketch">Эскиз, который будет экструзирован</param>
+        /// <param name="depth">Глубина экструзии</param>
+        /// <param name="name">Имя экструзии</param>
+        /// <param name="draftOutward">Флаг, указывающий направление экструзии</param>
         public void ExtrudeSketch(ISketch sketch, double depth, string name, bool draftOutward)
         {
             var part = sketch.Part;

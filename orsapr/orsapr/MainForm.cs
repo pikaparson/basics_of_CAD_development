@@ -13,36 +13,64 @@ using API_singly;
 using Logic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-
 using TextBox = System.Windows.Forms.TextBox;
- 
+
 namespace orsapr
 {
-
+    /// <summary>
+    /// Класс для работы с главным окном плагина
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Параметры табурета
+        /// </summary>
         private Parameters _parameters;
+        /// <summary>
+        /// Класс для построения табурета
+        /// </summary>
         private StringBuilder _errorMessages;
 
+        /// <summary>
+        /// Минимальное значение высоты ножки
+        /// </summary>
         private int _minLegLength = 300;
+        /// <summary>
+        /// Минимальное значение толщины сиденья
+        /// </summary>
         private int _minSeatThickness = 20;
+        /// <summary>
+        /// Тип ножек табурета
+        /// По умолчанию заданы квадратные ножки табурета.
+        /// </summary>
         private LegTypes _legsType = LegTypes.SquareLeg;
+        /// <summary>
+        /// Тип сиденья табурета
+        /// По умолчанию задано прямоугольное/квадратное сиденье табурета.
+        /// </summary>
         private SeatTypes _seatType = SeatTypes.SquareSeat;
 
+        /// <summary>
+        /// Инициализация компонентов главного окна
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
-                _parameters = new Parameters();
-                _errorMessages = new StringBuilder();
-                comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-                comboBox1.SelectedIndex = 0;
-                comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-                comboBox2.SelectedIndex = 0;
-                label11.Text = string.Empty;
-                textBox1.BackColor = SystemColors.Window;
+            _parameters = new Parameters();
+            _errorMessages = new StringBuilder();
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.SelectedIndex = 0;
+            label11.Text = string.Empty;
+            textBox1.BackColor = SystemColors.Window;
         }
 
-        // Метод для проверки значения textBox1
+        /// <summary>
+        /// Обработчик события изменения текста в поле для ввода длины и диаметра сиденья
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void TextBox1_OnChanged(object sender, EventArgs e)
         {
             if (_seatType == SeatTypes.SquareSeat)
@@ -55,58 +83,83 @@ namespace orsapr
             }
         }
 
-        // Метод для проверки значения textBox2
+        /// <summary>
+        /// Обработчик события изменения текста в поле для ввода ширины сиденья
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void TextBox2_OnChanged(object sender, EventArgs e)
         {
             ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
         }
 
-        // Метод для проверки значения textBox3
+        /// <summary>
+        /// Обработчик события изменения текста в поле для ввода толщины сиденья
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void TextBox3_OnChanged(object sender, EventArgs e)
         {
             ValidateAndSetValue(textBox3, _minSeatThickness, 35, "Толщина сиденья");
         }
 
-        // Метод для проверки значения textBox4
+        /// <summary>
+        /// Обработчик события изменения текста в поле для ввода высоты ножек
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void TextBox4_OnChanged(object sender, EventArgs e)
         {
             ValidateAndSetValue(textBox4, _minLegLength, 400, "Высота ножек");
         }
 
-        // Метод для проверки значения textBox5
+        /// <summary>
+        /// Обработчик события изменения текста в поле для ввода ширины и длины ножек и их диаметра
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события.</param>
         private void TextBox5_OnChanged(object sender, EventArgs e)
         {
-            ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+            if (_seatType == SeatTypes.SquareSeat)
+            {
+                ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+            }
+            else
+            {
+                ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
+            }
         }
 
+        /// <summary>
+        /// Метод для валидации и установки значения текстового поля
+        /// </summary>
+        /// <param name="textBox">Текстовое поле для валидации</param>
+        /// <param name="minValue">Минимальное значение</param>
+        /// <param name="maxValue">Максимальное значение</param>
+        /// <param name="textBoxName">Имя текстового поля</param>
         private void ValidateAndSetValue(TextBox textBox, int minValue, int maxValue, string textBoxName)
         {
             ClearError(textBoxName);
 
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                // Добавляем ошибку только для текущего поля
                 SetError(textBoxName, $"{textBoxName}: поле не должно быть пустым.");
-
                 return;
             }
 
             if (!int.TryParse(textBox.Text, out int value))
             {
-                // Добавляем ошибку о некорректном вводе
                 SetError(textBoxName, $"{textBoxName}: введено некорректное значение.");
                 return;
             }
 
-            // Проверяем границы значений
             if (value < minValue || value > maxValue)
             {
                 SetError(textBoxName, $"{textBoxName}: введены значения, не входящие в границы (от {minValue} до {maxValue}).");
                 return;
             }
 
-            // Если всё хорошо, устанавливаем значения в параметры
-            ClearError(textBoxName); // Дублируем вызов для завершения удаления предыдущих ошибок
+            ClearError(textBoxName);
 
             switch (textBoxName)
             {
@@ -140,6 +193,10 @@ namespace orsapr
                 ValidateDependentParameters();
         }
 
+        /// <summary>
+        /// Метод для корректировки минимального значения высоты ножек на основе толщины сиденья
+        /// </summary>
+        /// <param name="value">Толщина сиденья.</param>
         private void AdjustMinValuesBasedOnThickness(int value)
         {
             if (330 - value < 300)
@@ -150,6 +207,10 @@ namespace orsapr
             label9.Text = $"от {_minLegLength} до 400 мм";
         }
 
+        /// <summary>
+        /// Метод для корректировки минимального значения толщины сиденья на основе высоты ножек
+        /// </summary>
+        /// <param name="value">Высота ножек.</param>
         private void AdjustMinValuesBasedOnLegLength(int value)
         {
             if (330 - value < 20)
@@ -160,10 +221,13 @@ namespace orsapr
             label8.Text = $"от {_minSeatThickness} до 35 мм";
         }
 
-        // Установить ошибку
+        /// <summary>
+        /// Метод для указания ошибки в текстовом поле
+        /// </summary>
+        /// <param name="textBoxName">Имя текстового поля</param>
+        /// <param name="message">Сообщение об ошибке</param>
         private void SetError(string textBoxName, string message)
         {
-            // Проверка на наличие сообщения в строке ошибок
             if (!_errorMessages.ToString().Contains(message))
             {
                 _errorMessages.AppendLine(message);
@@ -172,7 +236,10 @@ namespace orsapr
             SetColors(textBoxName);
         }
 
-        // Очистить ошибку
+        /// <summary>
+        /// Метод для очистки ошибок в текстовом поле
+        /// </summary>
+        /// <param name="textBoxName">Имя текстового поля.</param>
         private void ClearError(string textBoxName)
         {
             string errorMessage;
@@ -188,7 +255,6 @@ namespace orsapr
             string[] lines = _errorMessages.ToString().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             _errorMessages.Clear();
 
-            // Убираем ошибки, которые содержат textBoxName
             foreach (string line in lines)
             {
                 if (!line.StartsWith(errorMessage))
@@ -198,24 +264,23 @@ namespace orsapr
             }
             UpdateErrorLabel();
 
-            // Проверка на наличие ошибок
             if (_errorMessages.Length == 0)
             {
                 label11.Text = string.Empty;
             }
 
-            // Устанавливаем цвет текстового поля на стандартный
             ResetColor(textBoxName);
         }
 
-        // Метод для проверки зависимых параметров
+        /// <summary>
+        /// Метод для проверки зависимых параметров
+        /// </summary>
         private void ValidateDependentParameters()
         {
-            // Сбрасываем цвет полей ввода для обновления
             ResetColor("Толщина сиденья");
             ResetColor("Высота ножек");
 
-            if (_parameters.SeatThickness > 0 && _parameters.LegLength > 0) // Убедитесь, что значения установлены
+            if (_parameters.SeatThickness > 0 && _parameters.LegLength > 0)
             {
                 if (!_parameters.CheckDependentParametersValue())
                 {
@@ -229,20 +294,23 @@ namespace orsapr
             }
         }
 
-        // Обновить строку ошибок
+        /// <summary>
+        /// Метод для обновления ошибок в поле с предупреждениями
+        /// </summary>
         private void UpdateErrorLabel()
         {
             label11.Text = _errorMessages.ToString();
         }
 
-        // Метод, который устанавливает цвет текстового поля
+        /// <summary>
+        /// Метод для установки цвета текстового поля с некорректным значением
+        /// </summary>
+        /// <param name="textBoxName">Имя текстового поля</param>
         private void SetColors(string textBoxName)
         {
             switch (textBoxName)
             {
                 case "Длина сиденья":
-                    textBox1.BackColor = Color.LightCoral;
-                    break;
                 case "Диаметр сиденья":
                     textBox1.BackColor = Color.LightCoral;
                     break;
@@ -256,8 +324,6 @@ namespace orsapr
                     textBox4.BackColor = Color.LightCoral;
                     break;
                 case "Ширина и длина ножек":
-                    textBox5.BackColor = Color.LightCoral;
-                    break;
                 case "Диаметр ножек":
                     textBox5.BackColor = Color.LightCoral;
                     break;
@@ -267,14 +333,16 @@ namespace orsapr
                     break;
             }
         }
-        // Метод, который сбрасывает цвет текстового поля на стандартный
+
+        /// <summary>
+        /// Метод для сброса цвета текстового поля на стандартный
+        /// </summary>
+        /// <param name="textBoxName">Имя текстового поля</param>
         private void ResetColor(string textBoxName)
         {
             switch (textBoxName)
             {
                 case "Длина сиденья":
-                    textBox1.BackColor = SystemColors.Window;
-                    break;
                 case "Диаметр сиденья":
                     textBox1.BackColor = SystemColors.Window;
                     break;
@@ -288,8 +356,6 @@ namespace orsapr
                     textBox4.BackColor = SystemColors.Window;
                     break;
                 case "Ширина и длина ножек":
-                    textBox5.BackColor = SystemColors.Window;
-                    break;
                 case "Диаметр ножек":
                     textBox5.BackColor = SystemColors.Window;
                     break;
@@ -300,7 +366,11 @@ namespace orsapr
             }
         }
 
-        // Метод для возможности ввода только цифр
+        /// <summary>
+        /// Метод для обработки ввода только цифр
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Аргументы события</param>
         private void TextBox_OnlyDigitKeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -309,12 +379,15 @@ namespace orsapr
             }
         }
 
+        /// <summary>
+        /// Обработчик события нажатия кнопки
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Аргументы события</param>
         private void button1_Click(object sender, EventArgs e)
         {
-            // Сначала очищаем все предыдущие сообщения об ошибках
             _errorMessages.Clear();
 
-            // Проводим валидацию каждого текстового поля
             if (_seatType == SeatTypes.SquareSeat)
             {
                 ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
@@ -324,7 +397,9 @@ namespace orsapr
             {
                 ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
             }
+
             ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+
             if (_legsType == LegTypes.SquareLeg)
             {
                 ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
@@ -333,210 +408,201 @@ namespace orsapr
             {
                 ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
             }
+
             ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
 
             if (_errorMessages.Length == 0)
             {
-                // Если ошибок нет, продолжаем основную логику
                 Builder builder = new Builder();
                 builder.BuildChair(_parameters, _seatType, _legsType);
             }
             else
             {
-                // Если есть ошибки, обновляем метку ошибок
                 UpdateErrorLabel();
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения выбора типа сиденья
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Аргументы события</param>
         private void SeatTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comboBox1.SelectedIndex)
             {
-                case 0: // Первый элемент (Длина)
+                case 0:
+                    _seatType = SeatTypes.SquareSeat;
+                    ClearError("Длина сиденья");
+                    ClearError("Ширина сиденья");
+                    ClearError("Толщина сиденья");
+                    ClearError("Диаметр сиденья");
+                    textBox1.BackColor = SystemColors.Window;
+                    textBox2.BackColor = SystemColors.Window;
+                    textBox3.BackColor = SystemColors.Window;
+                    if (textBox1.Text != "")
                     {
-                        _seatType = SeatTypes.SquareSeat;
-                        ClearError("Длина сиденья");
-                        ClearError("Ширина сиденья");
-                        ClearError("Толщина сиденья");
-                        ClearError("Диаметр сиденья");
-                        textBox1.BackColor = SystemColors.Window;
-                        textBox2.BackColor = SystemColors.Window;
-                        textBox3.BackColor = SystemColors.Window;
-                        if (textBox1.Text != "")
-                        {
-                            ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
-                        }
-                        if (textBox3.Text != "")
-                        {
-                            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-                        }
-
-                        // Параметры для прямоугольного сиденья
-                        groupBox2.Size = new Size(417, 110);
-                        label1.Text = "Длина";
-                        label5.Visible = true;
-                        label7.Visible = true;
-                        textBox2.Visible = true;
-                        textBox2.Enabled = true;
-
-                        label3.Location = new Point(58, 85);
-                        textBox3.Location = new Point(169, 82);
-                        label8.Location = new Point(258, 85);
-                        groupBox3.Location = new Point(7, 129);
-                        groupBox1.Location = new Point(7, 228);
-                        button1.Location = new Point(166, 318);
-                        this.MaximumSize = new Size(452, 390);
-                        this.MinimumSize = new Size(452, 390);
-                        break;
+                        ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
                     }
-                case 1: // Второй элемент (Диаметр)
+                    if (textBox3.Text != "")
                     {
-                        _seatType = SeatTypes.RoundSeat;
-                        ClearError("Длина сиденья");
-                        ClearError("Ширина сиденья");
-                        ClearError("Толщина сиденья");
-                        ClearError("Диаметр сиденья");
-                        textBox1.BackColor = SystemColors.Window;
-                        textBox2.BackColor = SystemColors.Window;
-                        textBox3.BackColor = SystemColors.Window;
-                        if (textBox1.Text != "")
-                        {
-                            ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
-                        }
-                        if (textBox3.Text != "")
-                        {
-                            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-                        }
-
-                        if (_legsType == LegTypes.SquareLeg && textBox5.BackColor == Color.LightCoral)
-                        {
-                            ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
-                        }
-                        else if (_seatType == SeatTypes.RoundSeat && textBox5.BackColor == Color.LightCoral)
-                        {
-                            ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
-                        }
-                        if (textBox4.BackColor == Color.LightCoral)
-                        {
-                            ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
-                        }
-
-                        _parameters.SeatWidth = 0; // Обязательно сбрасываем значение ширины
-                        textBox2.Visible = false;
-                        textBox2.Enabled = false;
-                        textBox2.Text = ""; // Очищаем текст, если поле отключено
-                        ClearError("Ширина сиденья");
-
-                        // Параметры для круглого сиденья
-                        label1.Text = "Диаметр";
-                        label5.Visible = false;
-                        label7.Visible = false;
-
-                        label3.Location = new Point(58, 64);
-                        textBox3.Location = new Point(169, 61);
-                        label8.Location = new Point(258, 64);
-                        groupBox3.Location = new Point(7, 105);
-                        groupBox1.Location = new Point(7, 204);
-                        button1.Location = new Point(166, 293);
-                        this.MaximumSize = new Size(452, 365);
-                        this.MinimumSize = new Size(452, 365);
-
-                        break;
+                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
                     }
+
+                    groupBox2.Size = new Size(417, 110);
+                    label1.Text = "Длина";
+                    label5.Visible = true;
+                    label7.Visible = true;
+                    textBox2.Visible = true;
+                    textBox2.Enabled = true;
+
+                    label3.Location = new Point(58, 85);
+                    textBox3.Location = new Point(169, 82);
+                    label8.Location = new Point(258, 85);
+                    groupBox3.Location = new Point(7, 129);
+                    groupBox1.Location = new Point(7, 228);
+                    button1.Location = new Point(166, 318);
+                    this.MaximumSize = new Size(452, 390);
+                    this.MinimumSize = new Size(452, 390);
+                    break;
+
+                case 1:
+                    _seatType = SeatTypes.RoundSeat;
+                    ClearError("Длина сиденья");
+                    ClearError("Ширина сиденья");
+                    ClearError("Толщина сиденья");
+                    ClearError("Диаметр сиденья");
+                    textBox1.BackColor = SystemColors.Window;
+                    textBox2.BackColor = SystemColors.Window;
+                    textBox3.BackColor = SystemColors.Window;
+                    if (textBox1.Text != "")
+                    {
+                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                    }
+                    if (textBox3.Text != "")
+                    {
+                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+                    }
+
+                    if (_legsType == LegTypes.SquareLeg && textBox5.BackColor == Color.LightCoral)
+                    {
+                        ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+                    }
+                    else if (_seatType == SeatTypes.RoundSeat && textBox5.BackColor == Color.LightCoral)
+                    {
+                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                    }
+                    if (textBox4.BackColor == Color.LightCoral)
+                    {
+                        ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
+                    }
+
+                    _parameters.SeatWidth = 0;
+                    textBox2.Visible = false;
+                    textBox2.Enabled = false;
+                    textBox2.Text = "";
+                    ClearError("Ширина сиденья");
+
+                    label1.Text = "Диаметр";
+                    label5.Visible = false;
+                    label7.Visible = false;
+
+                    label3.Location = new Point(58, 64);
+                    textBox3.Location = new Point(169, 61);
+                    label8.Location = new Point(258, 64);
+                    groupBox3.Location = new Point(7, 105);
+                    groupBox1.Location = new Point(7, 204);
+                    button1.Location = new Point(166, 293);
+                    this.MaximumSize = new Size(452, 365);
+                    this.MinimumSize = new Size(452, 365);
+                    break;
             }
         }
+
+        /// <summary>
+        /// Обработчик события изменения выбора типа ножек
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Аргументы события</param>
         private void LegsTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
+                    _legsType = LegTypes.SquareLeg;
+                    _errorMessages.Clear();
+                    textBox4.BackColor = SystemColors.Window;
+                    textBox5.BackColor = SystemColors.Window;
+                    label2.Text = "Длина и ширина";
+
+                    if (textBox4.Text != "")
                     {
-                        _legsType = LegTypes.SquareLeg;
-                        _errorMessages.Clear();
-                        textBox4.BackColor = SystemColors.Window;
-                        textBox5.BackColor = SystemColors.Window;
-                        label2.Text = "Длина и ширина";
+                        ValidateAndSetValue(textBox5, 300, 400, "Высота ножек");
+                    }
+                    if (textBox5.Text != "")
+                    {
+                        ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+                    }
 
-                        if (textBox4.Text != "")
+                    if (_seatType == SeatTypes.SquareSeat)
+                    {
+                        if (textBox1.BackColor == Color.LightCoral)
                         {
-                            ValidateAndSetValue(textBox5, 300, 400, "Высота ножек");
+                            ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
                         }
-                        if (textBox5.Text != "")
+                        if (textBox2.BackColor == Color.LightCoral)
                         {
-                            ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+                            ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
                         }
-
-                        if (_seatType == SeatTypes.SquareSeat)
+                        if (textBox3.BackColor == Color.LightCoral)
                         {
-                            if (textBox1.BackColor == Color.LightCoral)
-                            {
-                                ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
-                            }
-                            if (textBox2.BackColor == Color.LightCoral)
-                            {
-                                ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
-                            }
-                            if (textBox3.BackColor == Color.LightCoral)
-                            {
-                                ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-                            }
-                        }
-                        else if (_seatType == SeatTypes.RoundSeat)
-                        {
-                            ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
                             ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
                         }
-                        break;
                     }
+                    else if (_seatType == SeatTypes.RoundSeat)
+                    {
+                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+                    }
+                    break;
+
                 case 1:
+                    _legsType = LegTypes.RoundLeg;
+                    _errorMessages.Clear();
+                    textBox4.BackColor = SystemColors.Window;
+                    textBox5.BackColor = SystemColors.Window;
+                    label2.Text = "Диаметр";
+                    if (textBox4.Text != "")
                     {
-                        _legsType = LegTypes.RoundLeg;
-                        _errorMessages.Clear();
-                        textBox4.BackColor = SystemColors.Window;
-                        textBox5.BackColor = SystemColors.Window;
-                        label2.Text = "Диаметр";
-                        if (textBox4.Text != "")
-                        {
-                            ValidateAndSetValue(textBox5, 300, 400, "Высота ножек");
-                        }
-                        if (textBox5.Text != "")
-                        {
-                            ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
-                        }
+                        ValidateAndSetValue(textBox5, 300, 400, "Высота ножек");
+                    }
+                    if (textBox5.Text != "")
+                    {
+                        ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
+                    }
 
-                        if (_seatType == SeatTypes.SquareSeat)
+                    if (_seatType == SeatTypes.SquareSeat)
+                    {
+                        if (textBox1.BackColor == Color.LightCoral)
                         {
-                            if (textBox1.BackColor == Color.LightCoral)
-                            {
-                                ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
-                            }
-                            if (textBox2.BackColor == Color.LightCoral)
-                            {
-                                ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
-                            }
-                            if (textBox3.BackColor == Color.LightCoral)
-                            {
-                                ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-                            }
+                            ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
                         }
-                        else if (_seatType == SeatTypes.RoundSeat)
+                        if (textBox2.BackColor == Color.LightCoral)
                         {
-                            ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                            ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
+                        }
+                        if (textBox3.BackColor == Color.LightCoral)
+                        {
                             ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
                         }
-                        break;
                     }
+                    else if (_seatType == SeatTypes.RoundSeat)
+                    {
+                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+                    }
+                    break;
             }
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

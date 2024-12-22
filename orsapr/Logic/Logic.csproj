@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LegTypes.cs" />
+    <Compile Include="stool_enums\LegTypes.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeatTypes.cs" />
+    <Compile Include="stool_enums\SeatTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Kompas6API5">

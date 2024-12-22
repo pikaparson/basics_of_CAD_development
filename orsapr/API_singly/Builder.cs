@@ -6,7 +6,7 @@ using Logic;
 namespace API_singly
 {
     /// <summary>
-    /// Класс для построения конструкций, например, стульев
+    /// Класс для построения табурета
     /// </summary>
     public class Builder
     {
@@ -24,12 +24,12 @@ namespace API_singly
         }
 
         /// <summary>
-        /// Метод для построения стула с заданными параметрами, типом сиденья и ножек
+        /// Метод для построения табурета с заданными параметрами, типом сиденья и ножек
         /// </summary>
-        /// <param name="parameters">Параметры стула</param>
+        /// <param name="parameters">Параметры табурета</param>
         /// <param name="seatType">Тип сиденья</param>
         /// <param name="legType">Тип ножек</param>
-        public void BuildChair(Parameters parameters, SeatTypes seatType, LegTypes legType)
+        public void BuildStool(Parameters parameters, SeatTypes seatType, LegTypes legType)
         {
             _wrapper.OpenCad();
 
@@ -39,9 +39,9 @@ namespace API_singly
         }
 
         /// <summary>
-        /// Метод для построения сиденья стула
+        /// Метод для построения сиденья табурета
         /// </summary>
-        /// <param name="part">Часть стула, к которой добавляется сиденье</param>
+        /// <param name="part">Часть табурета, к которой добавляется сиденье</param>
         /// <param name="parameters">Параметры конструкции</param>
         /// <param name="type">Тип сиденья</param>
         private void BuildSeat(IPart7 part, Parameters parameters, SeatTypes type)
@@ -65,9 +65,9 @@ namespace API_singly
         }
 
         /// <summary>
-        /// Метод для построения ножек стула
+        /// Метод для построения ножек табурета
         /// </summary>
-        /// <param name="part">Часть стула, к которой добавляются ножки</param>
+        /// <param name="part">Часть табурета, к которой добавляются ножки</param>
         /// <param name="parameters">Параметры конструкции</param>
         /// <param name="seatType">Тип сиденья</param>
         /// <param name="legType">Тип ножек</param>

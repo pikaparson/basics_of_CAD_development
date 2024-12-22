@@ -384,7 +384,7 @@ namespace orsapr
         /// </summary>
         /// <param name="sender">Источник события</param>
         /// <param name="e">Аргументы события</param>
-        private void button1_Click(object sender, EventArgs e)
+        private void Build_Button_Click(object sender, EventArgs e)
         {
             _errorMessages.Clear();
 
@@ -414,7 +414,7 @@ namespace orsapr
             if (_errorMessages.Length == 0)
             {
                 Builder builder = new Builder();
-                builder.BuildChair(_parameters, _seatType, _legsType);
+                builder.BuildStool(_parameters, _seatType, _legsType);
             }
             else
             {

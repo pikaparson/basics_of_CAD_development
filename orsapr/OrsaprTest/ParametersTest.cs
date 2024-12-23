@@ -7,9 +7,15 @@ using Logic;
 
 namespace LogicTests
 {
+    /// <summary>
+    /// Тесты модели параметров
+    /// </summary>
     [TestFixture]
     public class ParametersTest
     {
+        /// <summary>
+        /// Тест присваивания значения длины сиденья
+        /// </summary>
         [Test]
         public void SeatLengthTest()
         {
@@ -17,7 +23,9 @@ namespace LogicTests
             parameters.SeatLength = 10;
             Assert.That(parameters.SeatLength, Is.EqualTo(10));
         }
-
+        /// <summary>
+        /// Тест присваивания значения ширины сиденья
+        /// </summary>
         [Test]
         public void SeatWidthTest()
         {
@@ -25,7 +33,9 @@ namespace LogicTests
             parameters.SeatWidth = 10;
             Assert.That(parameters.SeatWidth, Is.EqualTo(10));
         }
-
+        /// <summary>
+        /// Тест присваивания значения толщины сиденья
+        /// </summary>
         [Test]
         public void SeatThicknessTest()
         {
@@ -33,7 +43,9 @@ namespace LogicTests
             parameters.SeatThickness = 10;
             Assert.That(parameters.SeatThickness, Is.EqualTo(10));
         }
-
+        /// <summary>
+        /// Тест присваивания значения длины ножек
+        /// </summary>
         [Test]
         public void LegLengthTest()
         {
@@ -41,7 +53,9 @@ namespace LogicTests
             parameters.LegLength = 10;
             Assert.That(parameters.LegLength, Is.EqualTo(10));
         }
-
+        /// <summary>
+        /// Тест присваивания значения ширины ножек
+        /// </summary>
         [Test]
         public void LegWidthTest()
         {
@@ -49,7 +63,9 @@ namespace LogicTests
             parameters.LegWidth = 10;
             Assert.That(parameters.LegWidth, Is.EqualTo(10));
         }
-
+        /// <summary>
+        /// Тест присваивания значения высоты ножек
+        /// </summary>
         [Test]
         public void LegHeightTest()
         {
@@ -57,7 +73,9 @@ namespace LogicTests
             parameters.LegHeight = 10;
             Assert.That(parameters.LegHeight, Is.EqualTo(10));
         }
-
+        /// <summary>
+        /// Тест присваивания значений зависимых параметров
+        /// </summary>
         [Test]
         public void ValidateTest()
         {

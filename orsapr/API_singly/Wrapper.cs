@@ -106,9 +106,9 @@ namespace API_singly
         }
 
         /// <summary>
-        /// Метод для экструзии эскиза
+        /// Метод для выдавливания эскиза
         /// </summary>
-        /// <param name="sketch">Эскиз, который будет экструзирован</param>
+        /// <param name="sketch">Эскиз, который будет выдавлен</param>
         /// <param name="depth">Глубина экструзии</param>
         /// <param name="name">Имя экструзии</param>
         /// <param name="draftOutward">Флаг, указывающий направление экструзии</param>

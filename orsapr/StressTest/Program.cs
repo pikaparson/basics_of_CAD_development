@@ -32,6 +32,8 @@ namespace StressTest
             parameters.SeatThickness = 30;
             parameters.LegLength = 300;
             parameters.LegWidth = 30;
+            parameters.SeatType = SeatTypes.SquareSeat;
+            parameters.LegsType = LegTypes.RoundLeg;
 
             var builder = new Builder();
             var stopWatch = new Stopwatch();
@@ -47,7 +49,7 @@ namespace StressTest
                 var managementObject = enumerator.Current;
 
                 stopWatch.Start();
-                builder.BuildStool(parameters, SeatTypes.SquareSeat, LegTypes.RoundLeg);
+                builder.Build(parameters);
                 stopWatch.Stop();
                 var totalMemory = double.Parse(managementObject["TotalVisibleMemorySize"].ToString()) / 1024 / 1024;
                 var freeMemory = double.Parse(managementObject["FreePhysicalMemory"].ToString()) / 1024 / 1024;

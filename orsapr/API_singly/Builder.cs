@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using KompasAPI7;
 using Logic;
 
@@ -29,13 +30,13 @@ namespace API_singly
         /// <param name="parameters">Параметры табурета</param>
         /// <param name="seatType">Тип сиденья</param>
         /// <param name="legType">Тип ножек</param>
-        public void BuildStool(Parameters parameters, SeatTypes seatType, LegTypes legType)
+        public void Build(Parameters parameters)
         {
             _wrapper.OpenCad();
 
             IPart7 part = _wrapper.CreatePart();
-            BuildSeat(part, parameters, seatType);
-            BuildLegs(part, parameters, seatType, legType);
+            BuildSeat(part, parameters);
+            BuildLegs(part, parameters);
         }
 
         /// <summary>
@@ -44,10 +45,10 @@ namespace API_singly
         /// <param name="part">Часть табурета, к которой добавляется сиденье</param>
         /// <param name="parameters">Параметры конструкции</param>
         /// <param name="type">Тип сиденья</param>
-        private void BuildSeat(IPart7 part, Parameters parameters, SeatTypes type)
+        private void BuildSeat(IPart7 part, Parameters parameters)
         {
             ISketch sketch = _wrapper.CreateSketch(part, "Эскиз: сидушка");
-            switch (type)
+            switch (parameters.SeatType)
             {
                 case SeatTypes.SquareSeat:
                     {
@@ -71,12 +72,12 @@ namespace API_singly
         /// <param name="parameters">Параметры конструкции</param>
         /// <param name="seatType">Тип сиденья</param>
         /// <param name="legType">Тип ножек</param>
-        private void BuildLegs(IPart7 part, Parameters parameters, SeatTypes seatType, LegTypes legType)
+        private void BuildLegs(IPart7 part, Parameters parameters)
         {
             int legNumber = 0;
             legNumber++;
             ISketch legSketch = _wrapper.CreateSketch(part, "Эскиз: Ножка " + legNumber);
-            if (seatType == SeatTypes.SquareSeat)
+            if (parameters.SeatType == SeatTypes.SquareSeat)
             {
                 var coords = new List<Tuple<int, int>>
                 {
@@ -88,7 +89,7 @@ namespace API_singly
 
                 foreach (var point in coords)
                 {
-                    switch (legType)
+                    switch (parameters.LegsType)
                     {
                         case LegTypes.SquareLeg:
                             {
@@ -104,7 +105,7 @@ namespace API_singly
                     _wrapper.ExtrudeSketch(legSketch, -parameters.LegLength, "Элемент выдавливания: Ножка " + legNumber, false);
                 }
             }
-            else if (seatType == SeatTypes.RoundSeat)
+            else if (parameters.SeatType == SeatTypes.RoundSeat)
             {
                 var coords = new List<Tuple<int, int>>
                 {
@@ -116,7 +117,7 @@ namespace API_singly
 
                 foreach (var point in coords)
                 {
-                    switch (legType)
+                    switch (parameters.LegsType)
                     {
                         case LegTypes.SquareLeg:
                             {

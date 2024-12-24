@@ -36,6 +36,18 @@
         private int _legHeight;
 
         /// <summary>
+        /// Тип ножек табурета
+        /// По умолчанию заданы квадратные ножки табурета.
+        /// </summary>
+        private LegTypes _legsType = LegTypes.SquareLeg;
+
+        /// <summary>
+        /// Тип сиденья табурета
+        /// По умолчанию задано прямоугольное/квадратное сиденье табурета.
+        /// </summary>
+        private SeatTypes _seatType = SeatTypes.SquareSeat;
+
+        /// <summary>
         /// Конструктор по умолчанию, инициализирует параметры значениями по умолчанию
         /// </summary>
         public Parameters()
@@ -109,6 +121,18 @@
         {
             get { return _legHeight; }
             set { _legHeight = value; }
+        }
+
+        public LegTypes LegsType
+        {
+            get { return _legsType; }
+            set { _legsType = value; }
+        }
+
+        public SeatTypes SeatType
+        {
+            get { return _seatType; }
+            set { _seatType = value; }
         }
     }
 }

@@ -98,5 +98,34 @@ namespace LogicTests
 
             Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(false));
         }
+        /// <summary>
+        /// Тест присваивания значений типов сиденья
+        /// </summary>
+        [Test]
+        public void SeatTypeTest()
+        {
+            Parameters parameters = new Parameters();
+
+            parameters.SeatType = SeatTypes.SquareSeat;
+            Assert.That(parameters.SeatType, Is.EqualTo(SeatTypes.SquareSeat));
+
+            parameters.SeatType = SeatTypes.RoundSeat;
+            Assert.That(parameters.SeatType, Is.EqualTo(SeatTypes.RoundSeat));
+        }
+        /// <summary>
+        /// Тест присваивания значений типов ножек
+        /// </summary>
+        [Test]
+        public void LegsTypeTest()
+        {
+            Parameters parameters = new Parameters();
+
+            parameters.LegsType = LegTypes.RoundLeg;
+            Assert.That(parameters.LegsType, Is.EqualTo(LegTypes.RoundLeg));
+
+            parameters.LegsType = LegTypes.SquareLeg;
+            Assert.That(parameters.LegsType, Is.EqualTo(LegTypes.SquareLeg));
+        }
     }
 }
+

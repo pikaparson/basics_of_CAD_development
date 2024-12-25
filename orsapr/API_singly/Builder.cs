@@ -32,7 +32,10 @@ namespace API_singly
         /// <param name="legType">Тип ножек</param>
         public void Build(Parameters parameters)
         {
-            _wrapper.OpenCad();
+            if (!_wrapper.IsKompasOpened())
+            {
+                _wrapper.OpenCad();
+            }
 
             IPart7 part = _wrapper.CreatePart();
             BuildSeat(part, parameters);

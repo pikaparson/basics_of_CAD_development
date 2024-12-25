@@ -16,6 +16,11 @@ namespace API_singly
         /// </summary>
         private IKompasAPIObject _kompas;
 
+        public bool IsKompasOpened()
+        {
+            return _kompas != null;
+        }
+
         /// <summary>
         /// Метод для открытия CAD-приложения
         /// </summary>

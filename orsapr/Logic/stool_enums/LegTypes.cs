@@ -9,6 +9,7 @@
         /// Квадратные ножки
         /// </summary>
         SquareLeg,
+
         /// <summary>
         /// Круглые ножки
         /// </summary>

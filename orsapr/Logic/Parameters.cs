@@ -123,11 +123,14 @@
             set { _legHeight = value; }
         }
 
+        //TODO: в автосвойства
         public LegTypes LegsType
         {
             get { return _legsType; }
             set { _legsType = value; }
         }
+
+        //TODO: в автосвойства
 
         public SeatTypes SeatType
         {

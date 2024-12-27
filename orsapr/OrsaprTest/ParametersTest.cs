@@ -23,6 +23,7 @@ namespace LogicTests
             parameters.SeatLength = 10;
             Assert.That(parameters.SeatLength, Is.EqualTo(10));
         }
+
         /// <summary>
         /// Тест присваивания значения ширины сиденья
         /// </summary>

@@ -16,6 +16,7 @@ namespace API_singly
         /// </summary>
         private IKompasAPIObject _kompas;
 
+        //TODO:XML
         public bool IsKompasOpened()
         {
             return _kompas != null;

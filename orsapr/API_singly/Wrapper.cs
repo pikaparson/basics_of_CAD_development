@@ -16,7 +16,10 @@ namespace API_singly
         /// </summary>
         private IKompasAPIObject _kompas;
 
-        //TODO:XML
+        //TODO:XML+
+        /// <summary>
+        /// Метод, проверяющий открытие компаса
+        /// </summary>
         public bool IsKompasOpened()
         {
             return _kompas != null;
@@ -38,8 +41,10 @@ namespace API_singly
         /// <returns>Возвращает созданную часть</returns>
         public IPart7 CreatePart()
         {
-            _kompas.Application.Documents.Add(DocumentTypeEnum.ksDocumentPart);
-            IKompasDocument3D document3d = (IKompasDocument3D)_kompas.Application.ActiveDocument;
+            _kompas.Application.Documents
+                .Add(DocumentTypeEnum.ksDocumentPart);
+            IKompasDocument3D document3d = 
+                (IKompasDocument3D)_kompas.Application.ActiveDocument;
             return document3d.TopPart;
         }
 
@@ -64,21 +69,29 @@ namespace API_singly
         /// <summary>
         /// Метод для создания прямоугольника в эскизе
         /// </summary>
-        /// <param name="sketch">Эскиз, в который добавляется прямоугольник</param>
+        /// <param name="sketch">Эскиз, 
+        /// в который добавляется прямоугольник</param>
         /// <param name="x">Координата X начальной точки</param>
         /// <param name="y">Координата Y начальной точки</param>
         /// <param name="width">Ширина прямоугольника</param>
         /// <param name="height">Высота прямоугольника</param>
-        public void CreateRectangle(ISketch sketch, int x, int y, int width, int height)
+        public void CreateRectangle(
+            ISketch sketch, 
+            int x, 
+            int y, 
+            int width, 
+            int height)
         {
             IKompasDocument documentSketch = sketch.BeginEdit();
             IKompasDocument2D document2D = (IKompasDocument2D)documentSketch;
-            IViewsAndLayersManager viewsAndLayersManager = document2D.ViewsAndLayersManager;
+            IViewsAndLayersManager viewsAndLayersManager = 
+                document2D.ViewsAndLayersManager;
             IView view = viewsAndLayersManager.Views.ActiveView;
             IDrawingContainer drawingContainer = (IDrawingContainer)view;
 
             IRectangle rectangle = drawingContainer.Rectangles.Add();
-            rectangle.Style = (int)Kompas6Constants.ksCurveStyleEnum.ksCSNormal;
+            rectangle.Style = (int)Kompas6Constants
+                .ksCurveStyleEnum.ksCSNormal;
             rectangle.X = x;
             rectangle.Y = y;
             rectangle.Width = width;
@@ -98,12 +111,14 @@ namespace API_singly
         {
             IKompasDocument documentSketch = sketch.BeginEdit();
             IKompasDocument2D document2D = (IKompasDocument2D)documentSketch;
-            IViewsAndLayersManager viewsAndLayersManager = document2D.ViewsAndLayersManager;
+            IViewsAndLayersManager viewsAndLayersManager = 
+                document2D.ViewsAndLayersManager;
             IView view = viewsAndLayersManager.Views.ActiveView;
             IDrawingContainer drawingContainer = (IDrawingContainer)view;
 
             ICircle circle = drawingContainer.Circles.Add();
-            circle.Style = (int)Kompas6Constants.ksCurveStyleEnum.ksCSNormal;
+            circle.Style = 
+                (int)Kompas6Constants.ksCurveStyleEnum.ksCSNormal;
             circle.Xc = x;
             circle.Yc = y;
             circle.Radius = diameter / 2;
@@ -117,18 +132,26 @@ namespace API_singly
         /// <param name="sketch">Эскиз, который будет выдавлен</param>
         /// <param name="depth">Глубина экструзии</param>
         /// <param name="name">Имя экструзии</param>
-        /// <param name="draftOutward">Флаг, указывающий направление экструзии</param>
-        public void ExtrudeSketch(ISketch sketch, double depth, string name, bool draftOutward)
+        /// <param name="draftOutward">Флаг, 
+        /// указывающий направление экструзии</param>
+        public void ExtrudeSketch(
+            ISketch sketch, 
+            double depth, 
+            string name, 
+            bool draftOutward)
         {
             var part = sketch.Part;
             var modelContainer = (IModelContainer)part;
             var extrusions = modelContainer.Extrusions;
 
-            IExtrusion extrusion = extrusions.Add(Kompas6Constants3D.ksObj3dTypeEnum.o3d_bossExtrusion);
-            extrusion.Direction = Kompas6Constants3D.ksDirectionTypeEnum.dtNormal;
+            IExtrusion extrusion = 
+                extrusions.Add(Kompas6Constants3D.ksObj3dTypeEnum.o3d_bossExtrusion);
+            extrusion.Direction = 
+                Kompas6Constants3D.ksDirectionTypeEnum.dtNormal;
             extrusion.Name = name;
             extrusion.Hidden = false;
-            extrusion.ExtrusionType[true] = Kompas6Constants3D.ksEndTypeEnum.etBlind;
+            extrusion.ExtrusionType[true] = 
+                Kompas6Constants3D.ksEndTypeEnum.etBlind;
             extrusion.DraftOutward[true] = draftOutward;
             extrusion.DraftValue[true] = 0.0;
             extrusion.Depth[true] = depth;

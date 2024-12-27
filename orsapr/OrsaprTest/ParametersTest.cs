@@ -82,22 +82,30 @@ namespace LogicTests
         {
             Parameters parameters = new Parameters();
             Assert.IsNotNull(parameters);
-            Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(false));
+            Assert.That(
+                parameters.CheckDependentParametersValue(), 
+                Is.EqualTo(false));
 
             parameters.SeatThickness = 30;
             parameters.LegLength = 300;
 
-            Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(true));
+            Assert.That(
+                parameters.CheckDependentParametersValue(), 
+                Is.EqualTo(true));
 
             parameters.SeatThickness = 21;
             parameters.LegLength = 309;
 
-            Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(true));
+            Assert.That(
+                parameters.CheckDependentParametersValue(), 
+                Is.EqualTo(true));
 
             parameters.SeatThickness = 20;
             parameters.LegLength = 300;
 
-            Assert.That(parameters.CheckDependentParametersValue(), Is.EqualTo(false));
+            Assert.That(
+                parameters.CheckDependentParametersValue(), 
+                Is.EqualTo(false));
         }
         /// <summary>
         /// Тест присваивания значений типов сиденья
@@ -108,10 +116,14 @@ namespace LogicTests
             Parameters parameters = new Parameters();
 
             parameters.SeatType = SeatTypes.SquareSeat;
-            Assert.That(parameters.SeatType, Is.EqualTo(SeatTypes.SquareSeat));
+            Assert.That
+                (parameters.SeatType, 
+                Is.EqualTo(SeatTypes.SquareSeat));
 
             parameters.SeatType = SeatTypes.RoundSeat;
-            Assert.That(parameters.SeatType, Is.EqualTo(SeatTypes.RoundSeat));
+            Assert.That(
+                parameters.SeatType, 
+                Is.EqualTo(SeatTypes.RoundSeat));
         }
         /// <summary>
         /// Тест присваивания значений типов ножек
@@ -122,10 +134,14 @@ namespace LogicTests
             Parameters parameters = new Parameters();
 
             parameters.LegsType = LegTypes.RoundLeg;
-            Assert.That(parameters.LegsType, Is.EqualTo(LegTypes.RoundLeg));
+            Assert.That(
+                parameters.LegsType, 
+                Is.EqualTo(LegTypes.RoundLeg));
 
             parameters.LegsType = LegTypes.SquareLeg;
-            Assert.That(parameters.LegsType, Is.EqualTo(LegTypes.SquareLeg));
+            Assert.That(
+                parameters.LegsType, 
+                Is.EqualTo(LegTypes.SquareLeg));
         }
     }
 }

@@ -41,9 +41,12 @@ namespace StressTest
 
             while (true)
             {
-                ObjectQuery objectQuery = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
-                ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(objectQuery);
-                ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get();
+                ObjectQuery objectQuery = 
+                    new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+                ManagementObjectSearcher managementObjectSearcher = 
+                    new ManagementObjectSearcher(objectQuery);
+                ManagementObjectCollection managementObjectCollection = 
+                    managementObjectSearcher.Get();
                 var enumerator = managementObjectCollection.GetEnumerator();
                 enumerator.MoveNext();
                 var managementObject = enumerator.Current;
@@ -51,21 +54,29 @@ namespace StressTest
                 stopWatch.Start();
                 builder.Build(parameters);
                 stopWatch.Stop();
-                var totalMemory = double.Parse(managementObject["TotalVisibleMemorySize"].ToString()) / 1024 / 1024;
-                var freeMemory = double.Parse(managementObject["FreePhysicalMemory"].ToString()) / 1024 / 1024;
+                var totalMemory = 
+                    double.Parse(managementObject["TotalVisibleMemorySize"].ToString()) / 1024 / 1024;
+                var freeMemory = 
+                    double.Parse(managementObject["FreePhysicalMemory"].ToString()) / 1024 / 1024;
                 var usedMemory = (totalMemory - freeMemory);
-                writer.WriteLine($"{++count}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
+                writer.
+                    WriteLine($"{++count}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
                 writer.Flush();
                 stopWatch.Reset();
             }
             {
-                ObjectQuery objectQuery = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
-                ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(objectQuery);
-                ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get();
+                ObjectQuery objectQuery = 
+                    new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+                ManagementObjectSearcher managementObjectSearcher = 
+                    new ManagementObjectSearcher(objectQuery);
+                ManagementObjectCollection managementObjectCollection = 
+                    managementObjectSearcher.Get();
                 var enumerator = managementObjectCollection.GetEnumerator();
                 enumerator.MoveNext();
                 var managementObject = enumerator.Current;
-                writer.WriteLine($"End {double.Parse(managementObject["TotalVisibleMemorySize"].ToString()) / 1024 / 1024}");
+                writer.
+                    WriteLine($"End " +
+                    $"{double.Parse(managementObject["TotalVisibleMemorySize"].ToString()) / 1024 / 1024}");
             }
         }
     }

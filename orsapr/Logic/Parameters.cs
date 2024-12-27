@@ -36,19 +36,8 @@
         private int _legHeight;
 
         /// <summary>
-        /// Тип ножек табурета
-        /// По умолчанию заданы квадратные ножки табурета.
-        /// </summary>
-        private LegTypes _legsType = LegTypes.SquareLeg;
-
-        /// <summary>
-        /// Тип сиденья табурета
-        /// По умолчанию задано прямоугольное/квадратное сиденье табурета.
-        /// </summary>
-        private SeatTypes _seatType = SeatTypes.SquareSeat;
-
-        /// <summary>
-        /// Конструктор по умолчанию, инициализирует параметры значениями по умолчанию
+        /// Конструктор по умолчанию, инициализирует параметры значениями
+        /// по умолчанию
         /// </summary>
         public Parameters()
         {
@@ -63,7 +52,8 @@
         /// <summary>
         /// Метод для проверки зависимости параметров
         /// </summary>
-        /// <returns>Возвращает true, если сумма толщины сиденья и длины ножки не меньше 330; в противном случае - false.</returns>
+        /// <returns>Возвращает true, если сумма толщины сиденья и длины 
+        /// ножки не меньше 330; в противном случае - false.</returns>
         public bool CheckDependentParametersValue()
         {
             return (_seatThickness + _legLength) >= 330;
@@ -123,19 +113,23 @@
             set { _legHeight = value; }
         }
 
-        //TODO: в автосвойства
+        //TODO: в автосвойства+
+        /// <summary>
+        /// Тип ножек табурета
+        /// По умолчанию заданы квадратные ножки табурета.
+        /// </summary>
         public LegTypes LegsType
         {
-            get { return _legsType; }
-            set { _legsType = value; }
+            get; set;
         }
 
-        //TODO: в автосвойства
-
+        /// <summary>
+        /// Тип сиденья табурета
+        /// По умолчанию задано прямоугольное/квадратное сиденье табурета.
+        /// </summary>
         public SeatTypes SeatType
         {
-            get { return _seatType; }
-            set { _seatType = value; }
+            get; set;
         }
     }
 }

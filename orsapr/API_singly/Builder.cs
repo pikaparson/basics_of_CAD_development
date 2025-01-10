@@ -100,7 +100,7 @@ namespace API_singly
                 "Эскиз: Ножка " + legNumber);
 
 
-            //TODO: switch-case
+            //TODO: switch-case +
             if (parameters.SeatType == SeatTypes.SquareSeat)
             {
                 var coords = new List<Tuple<int, int>>

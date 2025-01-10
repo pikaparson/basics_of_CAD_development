@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using API_singly;
 using Logic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -31,16 +24,6 @@ namespace orsapr
         /// Класс для построения табурета
         /// </summary>
         private StringBuilder _errorMessages;
-
-        /// <summary>
-        /// Минимальное значение высоты ножки
-        /// </summary>
-        private int _minLegLength = 300;
-
-        /// <summary>
-        /// Минимальное значение толщины сиденья
-        /// </summary>
-        private int _minSeatThickness = 20;
 
         /// <summary>
         /// Инициализация компонентов главного окна
@@ -67,11 +50,11 @@ namespace orsapr
         {
             if (_parameters.SeatType == SeatTypes.SquareSeat)
             {
-                ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
+                ValidateAndSetValue(textBox1, "Длина сиденья");
             }
             else
             {
-                ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                ValidateAndSetValue(textBox1, "Диаметр сиденья");
             }
         }
 
@@ -82,7 +65,7 @@ namespace orsapr
         /// <param name="e">Аргументы события.</param>
         private void TextBox2_OnChanged(object sender, EventArgs e)
         {
-            ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
+            ValidateAndSetValue(textBox2, "Ширина сиденья");
         }
 
         /// <summary>
@@ -92,7 +75,7 @@ namespace orsapr
         /// <param name="e">Аргументы события.</param>
         private void TextBox3_OnChanged(object sender, EventArgs e)
         {
-            ValidateAndSetValue(textBox3, _minSeatThickness, 35, "Толщина сиденья");
+            ValidateAndSetValue(textBox3, "Толщина сиденья");
         }
 
         /// <summary>
@@ -102,7 +85,7 @@ namespace orsapr
         /// <param name="e">Аргументы события.</param>
         private void TextBox4_OnChanged(object sender, EventArgs e)
         {
-            ValidateAndSetValue(textBox4, _minLegLength, 400, "Высота ножек");
+            ValidateAndSetValue(textBox4, "Высота ножек");
         }
 
         /// <summary>
@@ -114,11 +97,11 @@ namespace orsapr
         {
             if (_parameters.SeatType == SeatTypes.SquareSeat)
             {
-                ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+                ValidateAndSetValue(textBox5, "Ширина и длина ножек");
             }
             else
             {
-                ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
+                ValidateAndSetValue(textBox5, "Диаметр ножек");
             }
         }
 
@@ -129,7 +112,7 @@ namespace orsapr
         /// <param name="minValue">Минимальное значение</param>
         /// <param name="maxValue">Максимальное значение</param>
         /// <param name="textBoxName">Имя текстового поля</param>
-        private void ValidateAndSetValue(TextBox textBox, int minValue, int maxValue, string textBoxName)
+        private void ValidateAndSetValue(TextBox textBox, string textBoxName)
         {
             ClearError(textBoxName);
 
@@ -142,12 +125,6 @@ namespace orsapr
             if (!int.TryParse(textBox.Text, out int value))
             {
                 SetError(textBoxName, $"{textBoxName}: введено некорректное значение.");
-                return;
-            }
-
-            if (value < minValue || value > maxValue)
-            {
-                SetError(textBoxName, $"{textBoxName}: введены значения, не входящие в границы (от {minValue} до {maxValue}).");
                 return;
             }
 
@@ -182,7 +159,16 @@ namespace orsapr
             }
 
             if (textBoxName == "Толщина сиденья" || textBoxName == "Высота ножек")
+            {
                 ValidateDependentParameters();
+                return;
+            }
+
+            if (_parameters.IsWrongValue(value, textBoxName, out Tuple<int, int> minMax))
+            {
+                SetError(textBoxName, $"{textBoxName}: введены значения, " +
+                    $"не входящие в границы (от {minMax.Item1} до {minMax.Item2}).");
+            }
         }
 
         /// <summary>
@@ -191,12 +177,9 @@ namespace orsapr
         /// <param name="value">Толщина сиденья.</param>
         private void AdjustMinValuesBasedOnThickness(int value)
         {
-            if (330 - value < 300)
-                _minLegLength = 300;
-            else
-                _minLegLength = 330 - value;
+            _parameters.AdjustMinValuesBasedOnThickness(value, out Tuple<int, int> newMinMax);
 
-            label9.Text = $"от {_minLegLength} до 400 мм";
+            label9.Text = $"от {newMinMax.Item1} до {newMinMax.Item2} мм";
         }
 
         /// <summary>
@@ -205,12 +188,8 @@ namespace orsapr
         /// <param name="value">Высота ножек.</param>
         private void AdjustMinValuesBasedOnLegLength(int value)
         {
-            if (330 - value < 20)
-                _minSeatThickness = 20;
-            else
-                _minSeatThickness = 330 - value;
-
-            label8.Text = $"от {_minSeatThickness} до 35 мм";
+            _parameters.AdjustMinValuesBasedOnLegLength(value, out Tuple<int, int> newMinMax);
+            label8.Text = $"от {newMinMax.Item1} до {newMinMax.Item2} мм";
         }
 
         /// <summary>
@@ -276,7 +255,7 @@ namespace orsapr
             {
                 if (!_parameters.CheckDependentParametersValue())
                 {
-                    SetError("Зависимые параметры", "Сумма толщины сиденья и длины ножки должна быть не менее 330.");
+                    SetError("Зависимые параметры", $"Сумма толщины сиденья и длины ножки должна быть не менее {Parameters.dependentParametersSumm}.");
                     SetColors("Зависимые параметры");
                 }
                 else
@@ -379,29 +358,46 @@ namespace orsapr
         private void Build_Button_Click(object sender, EventArgs e)
         {
             _errorMessages.Clear();
-
-            if (_parameters.SeatType == SeatTypes.SquareSeat)
+            switch(_parameters.SeatType)
             {
-                ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
-                ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
-            }
-            else if (_parameters.SeatType == SeatTypes.RoundSeat)
-            {
-                ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
-            }
-
-            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-
-            if (_parameters.LegsType == LegTypes.SquareLeg)
-            {
-                ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
-            }
-            else if (_parameters.LegsType == LegTypes.RoundLeg)
-            {
-                ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
+                case SeatTypes.SquareSeat:
+                {
+                    ValidateAndSetValue(textBox1, "Длина сиденья");
+                    ValidateAndSetValue(textBox2, "Ширина сиденья");
+                    break;
+                }
+                case SeatTypes.RoundSeat:
+                {
+                    ValidateAndSetValue(textBox1, "Диаметр сиденья");
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
             }
 
-            ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
+            ValidateAndSetValue(textBox3, "Толщина сиденья");
+
+            switch(_parameters.LegsType)
+            {
+                case LegTypes.SquareLeg:
+                {
+                    ValidateAndSetValue(textBox5, "Ширина и длина ножек");
+                    break;
+                }
+                case LegTypes.RoundLeg:
+                {
+                    ValidateAndSetValue(textBox5, "Диаметр ножек");
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+
+            ValidateAndSetValue(textBox4, "Высота ножек");
 
             if (_errorMessages.Length == 0)
             {
@@ -434,11 +430,11 @@ namespace orsapr
                     textBox3.BackColor = SystemColors.Window;
                     if (textBox1.Text != "")
                     {
-                        ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
+                        ValidateAndSetValue(textBox1, "Длина сиденья");
                     }
                     if (textBox3.Text != "")
                     {
-                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+                        ValidateAndSetValue(textBox3, "Толщина сиденья");
                     }
 
                     groupBox2.Size = new Size(417, 110);
@@ -469,24 +465,24 @@ namespace orsapr
                     textBox3.BackColor = SystemColors.Window;
                     if (textBox1.Text != "")
                     {
-                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                        ValidateAndSetValue(textBox1, "Диаметр сиденья");
                     }
                     if (textBox3.Text != "")
                     {
-                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
+                        ValidateAndSetValue(textBox3, "Толщина сиденья");
                     }
 
                     if (_parameters.LegsType == LegTypes.SquareLeg && textBox5.BackColor == Color.LightCoral)
                     {
-                        ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+                        ValidateAndSetValue(textBox5, "Ширина и длина ножек");
                     }
                     else if (_parameters.SeatType == SeatTypes.RoundSeat && textBox5.BackColor == Color.LightCoral)
                     {
-                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
+                        ValidateAndSetValue(textBox1, "Диаметр сиденья");
                     }
                     if (textBox4.BackColor == Color.LightCoral)
                     {
-                        ValidateAndSetValue(textBox4, 300, 400, "Высота ножек");
+                        ValidateAndSetValue(textBox4, "Высота ножек");
                     }
 
                     _parameters.SeatWidth = 0;
@@ -529,32 +525,36 @@ namespace orsapr
 
                     if (textBox4.Text != "")
                     {
-                        ValidateAndSetValue(textBox5, 300, 400, "Высота ножек");
+                        ValidateAndSetValue(textBox4, "Высота ножек");
                     }
                     if (textBox5.Text != "")
                     {
-                        ValidateAndSetValue(textBox5, 25, 35, "Ширина и длина ножек");
+                        ValidateAndSetValue(textBox5, "Ширина и длина ножек");
                     }
-
-                    if (_parameters.SeatType == SeatTypes.SquareSeat)
+                    switch(_parameters.SeatType)
                     {
-                        if (textBox1.BackColor == Color.LightCoral)
+                        case SeatTypes.SquareSeat:
                         {
-                            ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
+                            if (textBox1.BackColor == Color.LightCoral)
+                            {
+                                ValidateAndSetValue(textBox1, "Длина сиденья");
+                            }
+                            if (textBox2.BackColor == Color.LightCoral)
+                            {
+                                ValidateAndSetValue(textBox2, "Ширина сиденья");
+                            }
+                            if (textBox3.BackColor == Color.LightCoral)
+                            {
+                                ValidateAndSetValue(textBox3, "Толщина сиденья");
+                            }
+                            break;
                         }
-                        if (textBox2.BackColor == Color.LightCoral)
+                        case SeatTypes.RoundSeat:
                         {
-                            ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
+                            ValidateAndSetValue(textBox1, "Диаметр сиденья");
+                            ValidateAndSetValue(textBox3, "Толщина сиденья");
+                            break;
                         }
-                        if (textBox3.BackColor == Color.LightCoral)
-                        {
-                            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-                        }
-                    }
-                    else if (_parameters.SeatType == SeatTypes.RoundSeat)
-                    {
-                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
-                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
                     }
                     break;
 
@@ -566,40 +566,40 @@ namespace orsapr
                     label2.Text = "Диаметр";
                     if (textBox4.Text != "")
                     {
-                        ValidateAndSetValue(textBox5, 300, 400, "Высота ножек");
+                        ValidateAndSetValue(textBox4, "Высота ножек");
                     }
                     if (textBox5.Text != "")
                     {
-                        ValidateAndSetValue(textBox5, 25, 35, "Диаметр ножек");
+                        ValidateAndSetValue(textBox5, "Диаметр ножек");
                     }
 
-                    if (_parameters.SeatType == SeatTypes.SquareSeat)
+                    switch(_parameters.SeatType)
                     {
-                        if (textBox1.BackColor == Color.LightCoral)
+                        case SeatTypes.SquareSeat:
                         {
-                            ValidateAndSetValue(textBox1, 300, 400, "Длина сиденья");
+                            if (textBox1.BackColor == Color.LightCoral)
+                            {
+                                ValidateAndSetValue(textBox1, "Длина сиденья");
+                            }
+                            if (textBox2.BackColor == Color.LightCoral)
+                            {
+                                ValidateAndSetValue(textBox2, "Ширина сиденья");
+                            }
+                            if (textBox3.BackColor == Color.LightCoral)
+                            {
+                                ValidateAndSetValue(textBox3, "Толщина сиденья");
+                            }
+                            break;
                         }
-                        if (textBox2.BackColor == Color.LightCoral)
+                        case SeatTypes.RoundSeat:
                         {
-                            ValidateAndSetValue(textBox2, 300, 600, "Ширина сиденья");
+                            ValidateAndSetValue(textBox1, "Диаметр сиденья");
+                            ValidateAndSetValue(textBox3, "Толщина сиденья");
+                            break;
                         }
-                        if (textBox3.BackColor == Color.LightCoral)
-                        {
-                            ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
-                        }
-                    }
-                    else if (_parameters.SeatType == SeatTypes.RoundSeat)
-                    {
-                        ValidateAndSetValue(textBox1, 300, 400, "Диаметр сиденья");
-                        ValidateAndSetValue(textBox3, 20, 35, "Толщина сиденья");
                     }
                     break;
             }
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

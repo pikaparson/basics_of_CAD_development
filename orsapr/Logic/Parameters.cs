@@ -64,6 +64,7 @@ namespace Logic
 
             _minMaxValues = new Dictionary<string, Tuple<int, int>>
             {
+                //TODO: refactor
                 {"Длина сиденья", new Tuple<int, int>(300, 400) },
                 {"Диаметр сиденья", new Tuple<int, int>(300, 400) },
                 {"Ширина сиденья", new Tuple<int, int>(300, 600) },

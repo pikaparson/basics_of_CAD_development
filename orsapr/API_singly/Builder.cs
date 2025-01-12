@@ -55,7 +55,6 @@ namespace API
             ISketch sketch = _wrapper.CreateSketch(part, "Эскиз: сидушка");
             switch (parameters.SeatType)
             {
-                //TODO: RSDN+
                 case SeatTypes.SquareSeat:
                 {
                     _wrapper.CreateRectangle(
@@ -100,7 +99,6 @@ namespace API
                 "Эскиз: Ножка " + legNumber);
 
 
-            //TODO: switch-case +
             if (parameters.SeatType == SeatTypes.SquareSeat)
             {
                 var coords = new List<Tuple<int, int>>
@@ -117,14 +115,13 @@ namespace API
                         parameters.SeatLength - parameters.LegWidth)
                 };
 
+                 //TODO: duplication
                 foreach (var point in coords)
                 {
                     switch (parameters.LegsType)
                     {
-                        //TODO: RSDN+
                         case LegTypes.SquareLeg:
                         {
-                            //TODO: RSDN+
                             _wrapper.CreateRectangle(
                                 legSketch, 
                                 point.Item1, 
@@ -168,11 +165,11 @@ namespace API
                         parameters.SeatLength / 2 - parameters.LegWidth)
                 };
 
+                 //TODO: duplication
                 foreach (var point in coords)
                 {
                     switch (parameters.LegsType)
                     {
-                        //TODO: RSDN+
                         case LegTypes.SquareLeg:
                         {
                             _wrapper.CreateRectangle(

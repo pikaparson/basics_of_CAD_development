@@ -282,6 +282,7 @@ namespace orsapr
         /// <param name="textBoxName">Имя текстового поля</param>
         private void SetColors(string textBoxName)
         {
+             //TODO: duplication
             switch (textBoxName)
             {
                 case "Длина сиденья":
@@ -314,6 +315,7 @@ namespace orsapr
         /// <param name="textBoxName">Имя текстового поля</param>
         private void ResetColor(string textBoxName)
         {
+             //TODO: duplication
             switch (textBoxName)
             {
                 case "Длина сиденья":

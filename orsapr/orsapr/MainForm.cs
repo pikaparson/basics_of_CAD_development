@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using API;
-using Logic;
+using BusinessLogic;
 
 using TextBox = System.Windows.Forms.TextBox;
 

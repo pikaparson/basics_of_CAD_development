@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Logic
+namespace BusinessLogic
 {
     /// <summary>
     /// Класс, представляющий параметры конструкции стула

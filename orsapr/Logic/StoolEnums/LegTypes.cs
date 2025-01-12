@@ -1,4 +1,4 @@
-﻿namespace Logic
+﻿namespace BusinessLogic
 {
     /// <summary>
     /// Представляет типы ножек

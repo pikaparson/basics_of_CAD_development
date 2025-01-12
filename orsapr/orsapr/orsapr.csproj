@@ -127,13 +127,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\API_singly\API_singly.csproj">
+    <ProjectReference Include="..\API_singly\API.csproj">
       <Project>{4b492688-8e12-4d29-b2b7-db6bb5304b08}</Project>
-      <Name>API_singly</Name>
+      <Name>API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
+    <ProjectReference Include="..\Logic\BusinessLogic.csproj">
       <Project>{59e145e3-07ac-44cb-807a-40aca78822f9}</Project>
-      <Name>Logic</Name>
+      <Name>BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

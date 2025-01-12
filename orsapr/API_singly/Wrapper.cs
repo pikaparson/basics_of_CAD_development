@@ -4,7 +4,7 @@ using KompasAPI7;
 using Kompas6Constants;
 using Kompas6Constants3D;
 
-namespace API_singly
+namespace API
 {
     /// <summary>
     /// Обертка для взаимодействия с API Kompas

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orsapr", "orsapr\Orsapr.csproj", "{41822AFD-BA53-4E11-9A26-1E12EB2542D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicTests", "OrsaprTest\LogicTests.csproj", "{C64A3B33-97C5-42A0-94CF-F15626B819ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicTests", "OrsaprTest\BusinessLogicTests.csproj", "{C64A3B33-97C5-42A0-94CF-F15626B819ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{59E145E3-07AC-44CB-807A-40ACA78822F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Logic\BusinessLogic.csproj", "{59E145E3-07AC-44CB-807A-40ACA78822F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_singly", "API_singly\API_singly.csproj", "{4B492688-8E12-4D29-B2B7-DB6BB5304B08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API_singly\API.csproj", "{4B492688-8E12-4D29-B2B7-DB6BB5304B08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressTest", "StressTest\StressTest.csproj", "{863D3596-BCEC-446C-A29D-4BC84AC46329}"
 EndProject

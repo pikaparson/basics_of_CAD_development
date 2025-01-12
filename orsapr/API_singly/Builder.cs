@@ -4,7 +4,7 @@ using System.Threading;
 using KompasAPI7;
 using Logic;
 
-namespace API_singly
+namespace API
 {
     /// <summary>
     /// Класс для построения табурета

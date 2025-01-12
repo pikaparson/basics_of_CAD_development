@@ -338,7 +338,6 @@
             this.MinimumSize = new System.Drawing.Size(597, 469);
             this.Name = "MainForm";
             this.Text = "Табурет";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

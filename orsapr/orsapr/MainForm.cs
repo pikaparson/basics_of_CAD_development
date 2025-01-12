@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using API_singly;
+using API;
 using Logic;
 
 using TextBox = System.Windows.Forms.TextBox;
@@ -223,7 +223,8 @@ namespace orsapr
                 errorMessage = $"{textBoxName}: ";
             }
 
-            string[] lines = _errorMessages.ToString().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = _errorMessages.ToString().
+                Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             _errorMessages.Clear();
 
             foreach (string line in lines)
@@ -255,7 +256,9 @@ namespace orsapr
             {
                 if (!_parameters.CheckDependentParametersValue())
                 {
-                    SetError("Зависимые параметры", $"Сумма толщины сиденья и длины ножки должна быть не менее {Parameters.dependentParametersSumm}.");
+                    SetError(
+                        "Зависимые параметры", 
+                        $"Сумма толщины сиденья и длины ножки должна быть не менее {Parameters.dependentParametersSumm}.");
                     SetColors("Зависимые параметры");
                 }
                 else

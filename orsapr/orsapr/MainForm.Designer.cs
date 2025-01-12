@@ -30,32 +30,32 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.SeatLengthTextBox = new System.Windows.Forms.TextBox();
+            this.SeatWidthTextBox = new System.Windows.Forms.TextBox();
+            this.SeatThicknessTextBox = new System.Windows.Forms.TextBox();
+            this.LegsHeightTextBox = new System.Windows.Forms.TextBox();
+            this.LegsLengthAndWidthTextBox = new System.Windows.Forms.TextBox();
+            this.SeatLengthLabel = new System.Windows.Forms.Label();
+            this.LegsLengthLabel = new System.Windows.Forms.Label();
+            this.SeatThicknessLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.SeatWidthLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.WarningsGroupBox = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SeatParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.SeatFormsСomboBox = new System.Windows.Forms.ComboBox();
+            this.LegsParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.LegsParametersComboBox = new System.Windows.Forms.ComboBox();
+            this.WarningsGroupBox.SuspendLayout();
+            this.SeatParametersGroupBox.SuspendLayout();
+            this.LegsParametersGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -69,85 +69,85 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Build_Button_Click);
             // 
-            // textBox1
+            // SeatLengthTextBox
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(225, 49);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(112, 22);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_OnChanged);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
+            this.SeatLengthTextBox.BackColor = System.Drawing.Color.White;
+            this.SeatLengthTextBox.Location = new System.Drawing.Point(225, 49);
+            this.SeatLengthTextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.SeatLengthTextBox.Name = "SeatLengthTextBox";
+            this.SeatLengthTextBox.Size = new System.Drawing.Size(112, 22);
+            this.SeatLengthTextBox.TabIndex = 1;
+            this.SeatLengthTextBox.TextChanged += new System.EventHandler(this.TextBoxChanged);
+            this.SeatLengthTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
-            // textBox2
+            // SeatWidthTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(225, 75);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(112, 22);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_OnChanged);
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
+            this.SeatWidthTextBox.Location = new System.Drawing.Point(225, 75);
+            this.SeatWidthTextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.SeatWidthTextBox.Name = "SeatWidthTextBox";
+            this.SeatWidthTextBox.Size = new System.Drawing.Size(112, 22);
+            this.SeatWidthTextBox.TabIndex = 2;
+            this.SeatWidthTextBox.TextChanged += new System.EventHandler(this.TextBoxChanged);
+            this.SeatWidthTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
-            // textBox3
+            // SeatThicknessTextBox
             // 
-            this.textBox3.BackColor = System.Drawing.Color.White;
-            this.textBox3.Location = new System.Drawing.Point(225, 101);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(112, 22);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.TextChanged += new System.EventHandler(this.TextBox3_OnChanged);
-            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
+            this.SeatThicknessTextBox.BackColor = System.Drawing.Color.White;
+            this.SeatThicknessTextBox.Location = new System.Drawing.Point(225, 101);
+            this.SeatThicknessTextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.SeatThicknessTextBox.Name = "SeatThicknessTextBox";
+            this.SeatThicknessTextBox.Size = new System.Drawing.Size(112, 22);
+            this.SeatThicknessTextBox.TabIndex = 3;
+            this.SeatThicknessTextBox.TextChanged += new System.EventHandler(this.TextBoxChanged);
+            this.SeatThicknessTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
-            // textBox4
+            // LegsHeightTextBox
             // 
-            this.textBox4.BackColor = System.Drawing.Color.White;
-            this.textBox4.Location = new System.Drawing.Point(225, 53);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(112, 22);
-            this.textBox4.TabIndex = 4;
-            this.textBox4.TextChanged += new System.EventHandler(this.TextBox4_OnChanged);
-            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
+            this.LegsHeightTextBox.BackColor = System.Drawing.Color.White;
+            this.LegsHeightTextBox.Location = new System.Drawing.Point(225, 53);
+            this.LegsHeightTextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.LegsHeightTextBox.Name = "LegsHeightTextBox";
+            this.LegsHeightTextBox.Size = new System.Drawing.Size(112, 22);
+            this.LegsHeightTextBox.TabIndex = 4;
+            this.LegsHeightTextBox.TextChanged += new System.EventHandler(this.TextBoxChanged);
+            this.LegsHeightTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
-            // textBox5
+            // LegsLengthAndWidthTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(225, 79);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(112, 22);
-            this.textBox5.TabIndex = 5;
-            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5_OnChanged);
-            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
+            this.LegsLengthAndWidthTextBox.Location = new System.Drawing.Point(225, 79);
+            this.LegsLengthAndWidthTextBox.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.LegsLengthAndWidthTextBox.Name = "LegsLengthAndWidthTextBox";
+            this.LegsLengthAndWidthTextBox.Size = new System.Drawing.Size(112, 22);
+            this.LegsLengthAndWidthTextBox.TabIndex = 5;
+            this.LegsLengthAndWidthTextBox.TextChanged += new System.EventHandler(this.TextBoxChanged);
+            this.LegsLengthAndWidthTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_OnlyDigitKeyPress);
             // 
-            // label1
+            // SeatLengthLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Длина";
+            this.SeatLengthLabel.AutoSize = true;
+            this.SeatLengthLabel.Location = new System.Drawing.Point(77, 53);
+            this.SeatLengthLabel.Name = "SeatLengthLabel";
+            this.SeatLengthLabel.Size = new System.Drawing.Size(48, 16);
+            this.SeatLengthLabel.TabIndex = 6;
+            this.SeatLengthLabel.Text = "Длина";
             // 
-            // label2
+            // LegsLengthLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 16);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Ширина и длина";
+            this.LegsLengthLabel.AutoSize = true;
+            this.LegsLengthLabel.Location = new System.Drawing.Point(77, 82);
+            this.LegsLengthLabel.Name = "LegsLengthLabel";
+            this.LegsLengthLabel.Size = new System.Drawing.Size(112, 16);
+            this.LegsLengthLabel.TabIndex = 7;
+            this.LegsLengthLabel.Text = "Ширина и длина";
             // 
-            // label3
+            // SeatThicknessLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Толщина";
+            this.SeatThicknessLabel.AutoSize = true;
+            this.SeatThicknessLabel.Location = new System.Drawing.Point(77, 105);
+            this.SeatThicknessLabel.Name = "SeatThicknessLabel";
+            this.SeatThicknessLabel.Size = new System.Drawing.Size(65, 16);
+            this.SeatThicknessLabel.TabIndex = 8;
+            this.SeatThicknessLabel.Text = "Толщина";
             // 
             // label4
             // 
@@ -158,14 +158,14 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Высота";
             // 
-            // label5
+            // SeatWidthLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(77, 79);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Ширина";
+            this.SeatWidthLabel.AutoSize = true;
+            this.SeatWidthLabel.Location = new System.Drawing.Point(77, 79);
+            this.SeatWidthLabel.Name = "SeatWidthLabel";
+            this.SeatWidthLabel.Size = new System.Drawing.Size(58, 16);
+            this.SeatWidthLabel.TabIndex = 10;
+            this.SeatWidthLabel.Text = "Ширина";
             // 
             // label6
             // 
@@ -212,19 +212,19 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "от 25 до 35 мм";
             // 
-            // groupBox1
+            // WarningsGroupBox
             // 
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Location = new System.Drawing.Point(9, 281);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.MaximumSize = new System.Drawing.Size(556, 105);
-            this.groupBox1.MinimumSize = new System.Drawing.Size(556, 105);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(556, 105);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Предупреждения";
+            this.WarningsGroupBox.Controls.Add(this.label11);
+            this.WarningsGroupBox.Location = new System.Drawing.Point(9, 281);
+            this.WarningsGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.WarningsGroupBox.MaximumSize = new System.Drawing.Size(556, 105);
+            this.WarningsGroupBox.MinimumSize = new System.Drawing.Size(556, 105);
+            this.WarningsGroupBox.Name = "WarningsGroupBox";
+            this.WarningsGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.WarningsGroupBox.Size = new System.Drawing.Size(556, 105);
+            this.WarningsGroupBox.TabIndex = 17;
+            this.WarningsGroupBox.TabStop = false;
+            this.WarningsGroupBox.Text = "Предупреждения";
             // 
             // label11
             // 
@@ -234,27 +234,27 @@
             this.label11.Size = new System.Drawing.Size(0, 16);
             this.label11.TabIndex = 0;
             // 
-            // groupBox2
+            // SeatParametersGroupBox
             // 
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.textBox3);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(9, 15);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(556, 135);
-            this.groupBox2.TabIndex = 18;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Параметры сиденья";
+            this.SeatParametersGroupBox.Controls.Add(this.label12);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatFormsСomboBox);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatLengthLabel);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatLengthTextBox);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatWidthTextBox);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatThicknessTextBox);
+            this.SeatParametersGroupBox.Controls.Add(this.label8);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatThicknessLabel);
+            this.SeatParametersGroupBox.Controls.Add(this.label7);
+            this.SeatParametersGroupBox.Controls.Add(this.SeatWidthLabel);
+            this.SeatParametersGroupBox.Controls.Add(this.label6);
+            this.SeatParametersGroupBox.Location = new System.Drawing.Point(9, 15);
+            this.SeatParametersGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SeatParametersGroupBox.Name = "SeatParametersGroupBox";
+            this.SeatParametersGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.SeatParametersGroupBox.Size = new System.Drawing.Size(556, 135);
+            this.SeatParametersGroupBox.TabIndex = 18;
+            this.SeatParametersGroupBox.TabStop = false;
+            this.SeatParametersGroupBox.Text = "Параметры сиденья";
             // 
             // label12
             // 
@@ -266,38 +266,38 @@
             this.label12.TabIndex = 19;
             this.label12.Text = "Форма";
             // 
-            // comboBox1
+            // SeatFormsСomboBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.SeatFormsСomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SeatFormsСomboBox.FormattingEnabled = true;
+            this.SeatFormsСomboBox.Items.AddRange(new object[] {
             "Прямоугольная",
             "Круглая"});
-            this.comboBox1.Location = new System.Drawing.Point(225, 23);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(243, 24);
-            this.comboBox1.TabIndex = 19;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.SeatTypeComboBox_SelectedIndexChanged);
+            this.SeatFormsСomboBox.Location = new System.Drawing.Point(225, 23);
+            this.SeatFormsСomboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SeatFormsСomboBox.Name = "SeatFormsСomboBox";
+            this.SeatFormsСomboBox.Size = new System.Drawing.Size(243, 24);
+            this.SeatFormsСomboBox.TabIndex = 19;
+            this.SeatFormsСomboBox.SelectedIndexChanged += new System.EventHandler(this.SeatTypeComboBox_SelectedIndexChanged);
             // 
-            // groupBox3
+            // LegsParametersGroupBox
             // 
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.comboBox2);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Controls.Add(this.textBox5);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(9, 159);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(556, 114);
-            this.groupBox3.TabIndex = 20;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Параметры ножек";
+            this.LegsParametersGroupBox.Controls.Add(this.label13);
+            this.LegsParametersGroupBox.Controls.Add(this.LegsParametersComboBox);
+            this.LegsParametersGroupBox.Controls.Add(this.label9);
+            this.LegsParametersGroupBox.Controls.Add(this.LegsHeightTextBox);
+            this.LegsParametersGroupBox.Controls.Add(this.LegsLengthAndWidthTextBox);
+            this.LegsParametersGroupBox.Controls.Add(this.label10);
+            this.LegsParametersGroupBox.Controls.Add(this.LegsLengthLabel);
+            this.LegsParametersGroupBox.Controls.Add(this.label4);
+            this.LegsParametersGroupBox.Location = new System.Drawing.Point(9, 159);
+            this.LegsParametersGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.LegsParametersGroupBox.Name = "LegsParametersGroupBox";
+            this.LegsParametersGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.LegsParametersGroupBox.Size = new System.Drawing.Size(556, 114);
+            this.LegsParametersGroupBox.TabIndex = 20;
+            this.LegsParametersGroupBox.TabStop = false;
+            this.LegsParametersGroupBox.Text = "Параметры ножек";
             // 
             // label13
             // 
@@ -309,28 +309,28 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "Форма";
             // 
-            // comboBox2
+            // LegsParametersComboBox
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.LegsParametersComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LegsParametersComboBox.FormattingEnabled = true;
+            this.LegsParametersComboBox.Items.AddRange(new object[] {
             "Квадратные",
             "Круглые"});
-            this.comboBox2.Location = new System.Drawing.Point(225, 27);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(243, 24);
-            this.comboBox2.TabIndex = 16;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.LegsTypeComboBox_SelectedIndexChanged);
+            this.LegsParametersComboBox.Location = new System.Drawing.Point(224, 27);
+            this.LegsParametersComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.LegsParametersComboBox.Name = "LegsParametersComboBox";
+            this.LegsParametersComboBox.Size = new System.Drawing.Size(243, 24);
+            this.LegsParametersComboBox.TabIndex = 16;
+            this.LegsParametersComboBox.SelectedIndexChanged += new System.EventHandler(this.LegsTypeComboBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 422);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.LegsParametersGroupBox);
+            this.Controls.Add(this.SeatParametersGroupBox);
+            this.Controls.Add(this.WarningsGroupBox);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
@@ -338,12 +338,12 @@
             this.MinimumSize = new System.Drawing.Size(597, 469);
             this.Name = "MainForm";
             this.Text = "Табурет";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.WarningsGroupBox.ResumeLayout(false);
+            this.WarningsGroupBox.PerformLayout();
+            this.SeatParametersGroupBox.ResumeLayout(false);
+            this.SeatParametersGroupBox.PerformLayout();
+            this.LegsParametersGroupBox.ResumeLayout(false);
+            this.LegsParametersGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -351,28 +351,28 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox SeatLengthTextBox;
+        private System.Windows.Forms.TextBox SeatWidthTextBox;
+        private System.Windows.Forms.TextBox SeatThicknessTextBox;
+        private System.Windows.Forms.TextBox LegsHeightTextBox;
+        private System.Windows.Forms.TextBox LegsLengthAndWidthTextBox;
+        private System.Windows.Forms.Label SeatLengthLabel;
+        private System.Windows.Forms.Label LegsLengthLabel;
+        private System.Windows.Forms.Label SeatThicknessLabel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label SeatWidthLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox WarningsGroupBox;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox SeatParametersGroupBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox SeatFormsСomboBox;
+        private System.Windows.Forms.GroupBox LegsParametersGroupBox;
+        private System.Windows.Forms.ComboBox LegsParametersComboBox;
         private System.Windows.Forms.Label label13;
     }
 }

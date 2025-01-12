@@ -29,16 +29,16 @@ namespace orsapr
         /// <summary>
         /// Словарь названий параметров.
         /// </summary>
-        private Dictionary<ChairParameters, string> _parameterNames = new Dictionary<ChairParameters, string>
+        private Dictionary<StoolParameters, string> _parameterNames = new Dictionary<StoolParameters, string>
         {
-            {ChairParameters.SeatLength, "Длина сиденья"},
-            {ChairParameters.SeatDiameter, "Диаметр сиденья"},
-            {ChairParameters.SeatWidth, "Ширина сиденья"},
-            {ChairParameters.SeatThickness, "Толщина сиденья"},
-            {ChairParameters.LegsHeight, "Высота ножек"},
-            {ChairParameters.LegsDiameter, "Диаметр ножек"},
-            {ChairParameters.LegsWightAndLength, "Ширина и длина ножек"},
-            {ChairParameters.DependentParameters, "Зависимые параметры"},
+            {StoolParameters.SeatLength, "Длина сиденья"},
+            {StoolParameters.SeatDiameter, "Диаметр сиденья"},
+            {StoolParameters.SeatWidth, "Ширина сиденья"},
+            {StoolParameters.SeatThickness, "Толщина сиденья"},
+            {StoolParameters.LegsHeight, "Высота ножек"},
+            {StoolParameters.LegsDiameter, "Диаметр ножек"},
+            {StoolParameters.LegsWightAndLength, "Ширина и длина ножек"},
+            {StoolParameters.DependentParameters, "Зависимые параметры"},
         };
 
         /// <summary>
@@ -64,41 +64,41 @@ namespace orsapr
         /// <param name="e">Аргументы события.</param>
         private void TextBoxChanged(object sender, EventArgs e)
         {
-            Dictionary<TextBox, ChairParameters> handledTextBoxChairParameters;
-            handledTextBoxChairParameters = new Dictionary<TextBox, ChairParameters>
+            Dictionary<TextBox, StoolParameters> handledTextBoxStoolParameters;
+            handledTextBoxStoolParameters = new Dictionary<TextBox, StoolParameters>
                 {
-                    {SeatLengthTextBox, ChairParameters.SeatDiameter},
-                    {SeatWidthTextBox, ChairParameters.SeatWidth},
-                    {SeatThicknessTextBox, ChairParameters.SeatThickness},
-                    {LegsHeightTextBox, ChairParameters.LegsHeight},
-                    {LegsLengthAndWidthTextBox, ChairParameters.LegsDiameter},
+                    {SeatLengthTextBox, StoolParameters.SeatDiameter},
+                    {SeatWidthTextBox, StoolParameters.SeatWidth},
+                    {SeatThicknessTextBox, StoolParameters.SeatThickness},
+                    {LegsHeightTextBox, StoolParameters.LegsHeight},
+                    {LegsLengthAndWidthTextBox, StoolParameters.LegsDiameter},
                 };
 
             if (_parameters.SeatType == SeatTypes.SquareSeat)
             {
-                handledTextBoxChairParameters = new Dictionary<TextBox, ChairParameters>
+                handledTextBoxStoolParameters = new Dictionary<TextBox, StoolParameters>
                 {
-                    {SeatLengthTextBox, ChairParameters.SeatLength},
-                    {SeatWidthTextBox, ChairParameters.SeatWidth},
-                    {SeatThicknessTextBox, ChairParameters.SeatThickness},
-                    {LegsHeightTextBox, ChairParameters.LegsHeight},
-                    {LegsLengthAndWidthTextBox, ChairParameters.LegsWightAndLength},
+                    {SeatLengthTextBox, StoolParameters.SeatLength},
+                    {SeatWidthTextBox, StoolParameters.SeatWidth},
+                    {SeatThicknessTextBox, StoolParameters.SeatThickness},
+                    {LegsHeightTextBox, StoolParameters.LegsHeight},
+                    {LegsLengthAndWidthTextBox, StoolParameters.LegsWightAndLength},
                 };
             }
 
             var changedTextBox = (TextBox)sender;
-            var chairParameters = handledTextBoxChairParameters[changedTextBox];
-            ValidateAndSetValue(changedTextBox, chairParameters);
+            var stoolParameters = handledTextBoxStoolParameters[changedTextBox];
+            ValidateAndSetValue(changedTextBox, stoolParameters);
         }
 
         /// <summary>
         /// Метод для валидации и установки значения текстового поля.
         /// </summary>
         /// <param name="textBox">Текстовое поле для валидации.</param>
-        /// <param name="chairParameters">Параметр стула.</param>
-        private void ValidateAndSetValue(TextBox textBox, ChairParameters chairParameters)
+        /// <param name="StoolParameters">Параметр стула.</param>
+        private void ValidateAndSetValue(TextBox textBox, StoolParameters StoolParameters)
         {
-            var textBoxName = _parameterNames[chairParameters];
+            var textBoxName = _parameterNames[StoolParameters];
             ClearError(textBoxName, textBox);
 
             if (string.IsNullOrWhiteSpace(textBox.Text))
@@ -115,42 +115,42 @@ namespace orsapr
 
             ClearError(textBoxName, textBox);
 
-            switch (chairParameters)
+            switch (StoolParameters)
             {
-                case ChairParameters.SeatLength:
+                case StoolParameters.SeatLength:
                     _parameters.SeatLength = value;
                     break;
-                case ChairParameters.SeatDiameter:
+                case StoolParameters.SeatDiameter:
                     _parameters.SeatLength = value;
                     _parameters.SeatWidth = value;
                     break;
-                case ChairParameters.SeatWidth:
+                case StoolParameters.SeatWidth:
                     _parameters.SeatWidth = value;
                     break;
-                case ChairParameters.SeatThickness:
+                case StoolParameters.SeatThickness:
                     _parameters.SeatThickness = value;
-                    AdjustMinValues(value, chairParameters, label9);
+                    AdjustMinValues(value, StoolParameters, label9);
                     break;
-                case ChairParameters.LegsHeight:
+                case StoolParameters.LegsHeight:
                     _parameters.LegLength = value;
-                    AdjustMinValues(value, chairParameters, label8);
+                    AdjustMinValues(value, StoolParameters, label8);
                     break;
-                case ChairParameters.LegsWightAndLength:
+                case StoolParameters.LegsWightAndLength:
                     _parameters.LegWidth = value;
                     break;
-                case ChairParameters.LegsDiameter:
+                case StoolParameters.LegsDiameter:
                     _parameters.LegWidth = value;
                     break;
             }
 
-            if (chairParameters == ChairParameters.SeatThickness
-                || chairParameters == ChairParameters.LegsHeight)
+            if (StoolParameters == StoolParameters.SeatThickness
+                || StoolParameters == StoolParameters.LegsHeight)
             {
                 ValidateDependentParameters();
                 return;
             }
 
-            if (_parameters.IsWrongValue(value, chairParameters, out Tuple<int, int> minMax))
+            if (_parameters.IsWrongValue(value, StoolParameters, out Tuple<int, int> minMax))
             {
                 SetError(textBox, $"{textBoxName}: введены значения, " +
                     $"не входящие в границы (от {minMax.Item1} до {minMax.Item2}).");
@@ -163,7 +163,7 @@ namespace orsapr
         /// <param name="value">Значение параметра.</param>
         /// <param name="parameter">Параметр.</param>
         /// <param name="label">Лейбл диапазона значений.</param>
-        private void AdjustMinValues(int value, ChairParameters parameter, System.Windows.Forms.Label label)
+        private void AdjustMinValues(int value, StoolParameters parameter, System.Windows.Forms.Label label)
         {
             var newMinMax = _parameters.AdjustMinValues(value, parameter);
             label.Text = $"от {newMinMax.Item1} до {newMinMax.Item2} мм";
@@ -172,7 +172,7 @@ namespace orsapr
         /// <summary>
         /// Метод для указания ошибки в текстовом поле
         /// </summary>
-        /// <param name="textBoxName">Имя текстового поля</param>
+        /// <param name="textBox">Текстовое поле</param>
         /// <param name="message">Сообщение об ошибке</param>
         private void SetError(TextBox textBox, string message)
         {
@@ -188,10 +188,11 @@ namespace orsapr
         /// Метод для очистки ошибок в текстовом поле
         /// </summary>
         /// <param name="textBoxName">Имя текстового поля.</param>
+        /// <param name="textBox">Текстовое поле.</param>
         private void ClearError(string textBoxName, TextBox textBox)
         {
             string errorMessage;
-            if (textBoxName == _parameterNames[ChairParameters.DependentParameters])
+            if (textBoxName == _parameterNames[StoolParameters.DependentParameters])
             {
                 errorMessage = $"Сумма";
             }
@@ -238,8 +239,8 @@ namespace orsapr
                 }
                 else
                 {
-                    ClearError(_parameterNames[ChairParameters.DependentParameters], SeatThicknessTextBox);
-                    ClearError(_parameterNames[ChairParameters.DependentParameters], LegsHeightTextBox);
+                    ClearError(_parameterNames[StoolParameters.DependentParameters], SeatThicknessTextBox);
+                    ClearError(_parameterNames[StoolParameters.DependentParameters], LegsHeightTextBox);
                 }
             }
         }
@@ -255,7 +256,7 @@ namespace orsapr
         /// <summary>
         /// Метод для установки цвета текстового поля с некорректным значением
         /// </summary>
-        /// <param name="textBoxName">Имя текстового поля</param>
+        /// <param name="textBox">Текстовое поле</param>
         private void SetColors(TextBox textBox)
         {
             textBox.BackColor = Color.LightCoral;
@@ -265,7 +266,7 @@ namespace orsapr
         /// <summary>
         /// Метод для сброса цвета текстового поля на стандартный
         /// </summary>
-        /// <param name="textBoxName">Имя текстового поля</param>
+        /// <param name="textBox">Текстовое поле</param>
         private void ResetColor(TextBox textBox)
         {
             textBox.BackColor = SystemColors.Window;
@@ -297,13 +298,13 @@ namespace orsapr
             {
                 case SeatTypes.SquareSeat:
                     {
-                        ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatLength);
-                        ValidateAndSetValue(SeatWidthTextBox, ChairParameters.SeatWidth);
+                        ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatLength);
+                        ValidateAndSetValue(SeatWidthTextBox, StoolParameters.SeatWidth);
                         break;
                     }
                 case SeatTypes.RoundSeat:
                     {
-                        ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatDiameter);
+                        ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatDiameter);
                         break;
                     }
                 default:
@@ -312,18 +313,18 @@ namespace orsapr
                     }
             }
 
-            ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+            ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
 
             switch (_parameters.LegsType)
             {
                 case LegTypes.SquareLeg:
                     {
-                        ValidateAndSetValue(LegsLengthAndWidthTextBox, ChairParameters.LegsWightAndLength);
+                        ValidateAndSetValue(LegsLengthAndWidthTextBox, StoolParameters.LegsWightAndLength);
                         break;
                     }
                 case LegTypes.RoundLeg:
                     {
-                        ValidateAndSetValue(LegsLengthAndWidthTextBox, ChairParameters.LegsDiameter);
+                        ValidateAndSetValue(LegsLengthAndWidthTextBox, StoolParameters.LegsDiameter);
                         break;
                     }
                 default:
@@ -332,7 +333,7 @@ namespace orsapr
                     }
             }
 
-            ValidateAndSetValue(LegsHeightTextBox, ChairParameters.LegsHeight);
+            ValidateAndSetValue(LegsHeightTextBox, StoolParameters.LegsHeight);
 
             if (_errorMessages.Length == 0)
             {
@@ -356,19 +357,19 @@ namespace orsapr
             {
                 case 0:
                     _parameters.SeatType = SeatTypes.SquareSeat;
-                    ClearError(_parameterNames[ChairParameters.SeatLength], SeatLengthTextBox);
-                    ClearError(_parameterNames[ChairParameters.SeatWidth], SeatWidthTextBox);
-                    ClearError(_parameterNames[ChairParameters.SeatThickness], SeatThicknessTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatLength], SeatLengthTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatWidth], SeatWidthTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatThickness], SeatThicknessTextBox);
                     SeatLengthTextBox.BackColor = SystemColors.Window;
                     SeatWidthTextBox.BackColor = SystemColors.Window;
                     SeatThicknessTextBox.BackColor = SystemColors.Window;
                     if (SeatLengthTextBox.Text != "")
                     {
-                        ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatLength);
+                        ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatLength);
                     }
                     if (SeatThicknessTextBox.Text != "")
                     {
-                        ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+                        ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
                     }
 
                     SeatParametersGroupBox.Size = new Size(417, 110);
@@ -390,39 +391,39 @@ namespace orsapr
 
                 case 1:
                     _parameters.SeatType = SeatTypes.RoundSeat;
-                    ClearError(_parameterNames[ChairParameters.SeatLength], SeatLengthTextBox);
-                    ClearError(_parameterNames[ChairParameters.SeatWidth], SeatWidthTextBox);
-                    ClearError(_parameterNames[ChairParameters.SeatThickness], SeatThicknessTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatLength], SeatLengthTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatWidth], SeatWidthTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatThickness], SeatThicknessTextBox);
                     SeatLengthTextBox.BackColor = SystemColors.Window;
                     SeatWidthTextBox.BackColor = SystemColors.Window;
                     SeatThicknessTextBox.BackColor = SystemColors.Window;
                     if (SeatLengthTextBox.Text != "")
                     {
-                        ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatDiameter);
+                        ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatDiameter);
                     }
                     if (SeatThicknessTextBox.Text != "")
                     {
-                        ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+                        ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
                     }
 
                     if (_parameters.LegsType == LegTypes.SquareLeg && LegsLengthAndWidthTextBox.BackColor == Color.LightCoral)
                     {
-                        ValidateAndSetValue(LegsLengthAndWidthTextBox, ChairParameters.LegsWightAndLength);
+                        ValidateAndSetValue(LegsLengthAndWidthTextBox, StoolParameters.LegsWightAndLength);
                     }
                     else if (_parameters.SeatType == SeatTypes.RoundSeat && LegsLengthAndWidthTextBox.BackColor == Color.LightCoral)
                     {
-                        ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatDiameter);
+                        ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatDiameter);
                     }
                     if (LegsHeightTextBox.BackColor == Color.LightCoral)
                     {
-                        ValidateAndSetValue(LegsHeightTextBox, ChairParameters.LegsHeight);
+                        ValidateAndSetValue(LegsHeightTextBox, StoolParameters.LegsHeight);
                     }
 
                     _parameters.SeatWidth = 0;
                     SeatWidthTextBox.Visible = false;
                     SeatWidthTextBox.Enabled = false;
                     SeatWidthTextBox.Text = "";
-                    ClearError(_parameterNames[ChairParameters.SeatWidth], SeatWidthTextBox);
+                    ClearError(_parameterNames[StoolParameters.SeatWidth], SeatWidthTextBox);
 
                     SeatLengthLabel.Text = "Диаметр";
                     SeatWidthLabel.Visible = false;
@@ -458,11 +459,11 @@ namespace orsapr
 
                     if (LegsHeightTextBox.Text != "")
                     {
-                        ValidateAndSetValue(LegsHeightTextBox, ChairParameters.LegsHeight);
+                        ValidateAndSetValue(LegsHeightTextBox, StoolParameters.LegsHeight);
                     }
                     if (LegsLengthAndWidthTextBox.Text != "")
                     {
-                        ValidateAndSetValue(LegsLengthAndWidthTextBox, ChairParameters.LegsWightAndLength);
+                        ValidateAndSetValue(LegsLengthAndWidthTextBox, StoolParameters.LegsWightAndLength);
                     }
                     switch (_parameters.SeatType)
                     {
@@ -470,22 +471,22 @@ namespace orsapr
                             {
                                 if (SeatLengthTextBox.BackColor == Color.LightCoral)
                                 {
-                                    ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatLength);
+                                    ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatLength);
                                 }
                                 if (SeatWidthTextBox.BackColor == Color.LightCoral)
                                 {
-                                    ValidateAndSetValue(SeatWidthTextBox, ChairParameters.SeatWidth);
+                                    ValidateAndSetValue(SeatWidthTextBox, StoolParameters.SeatWidth);
                                 }
                                 if (SeatThicknessTextBox.BackColor == Color.LightCoral)
                                 {
-                                    ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+                                    ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
                                 }
                                 break;
                             }
                         case SeatTypes.RoundSeat:
                             {
-                                ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatDiameter);
-                                ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+                                ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatDiameter);
+                                ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
                                 break;
                             }
                     }
@@ -499,11 +500,11 @@ namespace orsapr
                     LegsLengthLabel.Text = "Диаметр";
                     if (LegsHeightTextBox.Text != "")
                     {
-                        ValidateAndSetValue(LegsHeightTextBox, ChairParameters.LegsHeight);
+                        ValidateAndSetValue(LegsHeightTextBox, StoolParameters.LegsHeight);
                     }
                     if (LegsLengthAndWidthTextBox.Text != "")
                     {
-                        ValidateAndSetValue(LegsLengthAndWidthTextBox, ChairParameters.LegsDiameter);
+                        ValidateAndSetValue(LegsLengthAndWidthTextBox, StoolParameters.LegsDiameter);
                     }
 
                     switch (_parameters.SeatType)
@@ -512,22 +513,22 @@ namespace orsapr
                             {
                                 if (SeatLengthTextBox.BackColor == Color.LightCoral)
                                 {
-                                    ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatLength);
+                                    ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatLength);
                                 }
                                 if (SeatWidthTextBox.BackColor == Color.LightCoral)
                                 {
-                                    ValidateAndSetValue(SeatWidthTextBox, ChairParameters.SeatWidth);
+                                    ValidateAndSetValue(SeatWidthTextBox, StoolParameters.SeatWidth);
                                 }
                                 if (SeatThicknessTextBox.BackColor == Color.LightCoral)
                                 {
-                                    ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+                                    ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
                                 }
                                 break;
                             }
                         case SeatTypes.RoundSeat:
                             {
-                                ValidateAndSetValue(SeatLengthTextBox, ChairParameters.SeatDiameter);
-                                ValidateAndSetValue(SeatThicknessTextBox, ChairParameters.SeatThickness);
+                                ValidateAndSetValue(SeatLengthTextBox, StoolParameters.SeatDiameter);
+                                ValidateAndSetValue(SeatThicknessTextBox, StoolParameters.SeatThickness);
                                 break;
                             }
                     }

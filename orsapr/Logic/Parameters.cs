@@ -13,24 +13,24 @@ namespace BusinessLogic
         /// <summary>
         /// Словарь с минимальными и максимальными значениями параметров.
         /// </summary>
-        private readonly Dictionary<ChairParameters, Tuple<int, int>> _minMaxValues = new Dictionary<ChairParameters, Tuple<int, int>>
+        private readonly Dictionary<StoolParameters, Tuple<int, int>> _minMaxValues = new Dictionary<StoolParameters, Tuple<int, int>>
         {
-            {ChairParameters.SeatLength, new Tuple<int, int>(300, 400) },
-            {ChairParameters.SeatDiameter, new Tuple<int, int>(300, 400) },
-            {ChairParameters.SeatWidth, new Tuple<int, int>(300, 600) },
-            {ChairParameters.SeatThickness, new Tuple<int, int>(20, 35) },
-            {ChairParameters.LegsHeight, new Tuple<int, int>(300, 400) },
-            {ChairParameters.LegsWightAndLength, new Tuple<int, int>(25, 35) },
-            {ChairParameters.LegsDiameter, new Tuple<int, int>(25, 35) },
+            {StoolParameters.SeatLength, new Tuple<int, int>(300, 400) },
+            {StoolParameters.SeatDiameter, new Tuple<int, int>(300, 400) },
+            {StoolParameters.SeatWidth, new Tuple<int, int>(300, 600) },
+            {StoolParameters.SeatThickness, new Tuple<int, int>(20, 35) },
+            {StoolParameters.LegsHeight, new Tuple<int, int>(300, 400) },
+            {StoolParameters.LegsWightAndLength, new Tuple<int, int>(25, 35) },
+            {StoolParameters.LegsDiameter, new Tuple<int, int>(25, 35) },
             };
 
         /// <summary>
         /// Словарь зависимых параметров табурета.
         /// </summary>
-        private readonly Dictionary<ChairParameters, ChairParameters> DependentParameters = new Dictionary<ChairParameters, ChairParameters>
+        private readonly Dictionary<StoolParameters, StoolParameters> DependentParameters = new Dictionary<StoolParameters, StoolParameters>
         {
-            {ChairParameters.LegsHeight, ChairParameters.SeatThickness},
-            {ChairParameters.SeatThickness, ChairParameters.LegsHeight},
+            {StoolParameters.LegsHeight, StoolParameters.SeatThickness},
+            {StoolParameters.SeatThickness, StoolParameters.LegsHeight},
         };
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace BusinessLogic
         /// <param name="value">Значение свойства.</param>
         /// <param name="valueName">Параметр табурета.</param>
         /// <param name="minMax">Границы значений свойств.</param>
-        public bool IsWrongValue(int value, ChairParameters valueName, out Tuple<int, int> minMax)
+        public bool IsWrongValue(int value, StoolParameters valueName, out Tuple<int, int> minMax)
         {
             var current = _minMaxValues[valueName];
             minMax = current;
@@ -117,7 +117,7 @@ namespace BusinessLogic
         /// <param name="value">Значение параметра.</param>
         /// <param name="parameter">Тип параметра.</param>
         /// <returns>Новый диапазон значений зависимого параметра.</returns>
-        public Tuple<int, int> AdjustMinValues(int value, ChairParameters parameter)
+        public Tuple<int, int> AdjustMinValues(int value, StoolParameters parameter)
         {
             var depentParameter = DependentParameters[parameter];
             var oldMin = _minMaxValues[depentParameter].Item1;

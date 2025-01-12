@@ -9,7 +9,7 @@ namespace BusinessLogic
     /// <summary>
     /// Перечисление параметров стула.
     /// </summary>
-    public enum ChairParameters
+    public enum StoolParameters
     {
         /// <summary>
         /// Длина сиденья.

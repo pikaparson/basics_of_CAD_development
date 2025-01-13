@@ -16,7 +16,6 @@ namespace API
         /// </summary>
         private IKompasAPIObject _kompas;
 
-        //TODO:XML+
         /// <summary>
         /// Метод, проверяющий открытие компаса
         /// </summary>

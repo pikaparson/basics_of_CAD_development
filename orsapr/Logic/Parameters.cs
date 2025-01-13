@@ -73,7 +73,6 @@ namespace BusinessLogic
         /// </summary>
         public int LegHeight { get; set; }
 
-        //TODO: в автосвойства+
         /// <summary>
         /// Тип ножек табурета.
         /// По умолчанию заданы квадратные ножки табурета.

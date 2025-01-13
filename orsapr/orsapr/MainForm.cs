@@ -260,7 +260,6 @@ namespace orsapr
         private void SetColors(TextBox textBox)
         {
             textBox.BackColor = Color.LightCoral;
-            //TODO: duplication +
         }
 
         /// <summary>
@@ -270,7 +269,6 @@ namespace orsapr
         private void ResetColor(TextBox textBox)
         {
             textBox.BackColor = SystemColors.Window;
-            //TODO: duplication +
         }
 
         /// <summary>

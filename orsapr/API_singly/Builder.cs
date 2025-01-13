@@ -114,8 +114,6 @@ namespace API
                         parameters.SeatWidth - parameters.LegWidth,
                         parameters.SeatLength - parameters.LegWidth)
                 };
-
-                 //TODO: duplication+
             }
             else
             {
@@ -134,8 +132,6 @@ namespace API
                         -parameters.LegWidth / 2 , 
                         parameters.SeatLength / 2 - parameters.LegWidth)
                 };
-
-                 //TODO: duplication+       
             }
             foreach (var point in coords)
             {

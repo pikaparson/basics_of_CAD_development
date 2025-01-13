@@ -13,7 +13,8 @@ namespace BusinessLogic
         /// <summary>
         /// Словарь с минимальными и максимальными значениями параметров.
         /// </summary>
-        private readonly Dictionary<StoolParameters, Tuple<int, int>> _minMaxValues = new Dictionary<StoolParameters, Tuple<int, int>>
+        private readonly Dictionary<StoolParameters, Tuple<int, int>> _minMaxValues 
+            = new Dictionary<StoolParameters, Tuple<int, int>>
         {
             {StoolParameters.SeatLength, new Tuple<int, int>(300, 400) },
             {StoolParameters.SeatDiameter, new Tuple<int, int>(300, 400) },
@@ -27,7 +28,8 @@ namespace BusinessLogic
         /// <summary>
         /// Словарь зависимых параметров табурета.
         /// </summary>
-        private readonly Dictionary<StoolParameters, StoolParameters> DependentParameters = new Dictionary<StoolParameters, StoolParameters>
+        private readonly Dictionary<StoolParameters, StoolParameters> DependentParameters 
+            = new Dictionary<StoolParameters, StoolParameters>
         {
             {StoolParameters.LegsHeight, StoolParameters.SeatThickness},
             {StoolParameters.SeatThickness, StoolParameters.LegsHeight},
@@ -36,12 +38,12 @@ namespace BusinessLogic
         /// <summary>
         /// Константа, обозначающая минимальную длину табурета.
         /// </summary>
-        public const int dependentParametersMinSum = 330;
+        public const int DependentParametersMinSum = 330;
 
         /// <summary>
         /// Константа, обозначающая максимальную длину табурета.
         /// </summary>
-        public const int dependentParametersMaxSum = 435;
+        public const int DependentParametersMaxSum = 435;
 
         /// <summary>
         /// Свойство для доступа к длине сиденья.
@@ -106,8 +108,8 @@ namespace BusinessLogic
         /// ножки не меньше 330; в противном случае - false.</returns>
         public bool CheckDependentParametersValue()
         {
-            return (SeatThickness + LegLength) >= dependentParametersMinSum
-                && (SeatThickness + LegLength) <= dependentParametersMaxSum;
+            return (SeatThickness + LegLength) >= DependentParametersMinSum
+                && (SeatThickness + LegLength) <= DependentParametersMaxSum;
         }
 
         /// <summary>
@@ -122,12 +124,12 @@ namespace BusinessLogic
             var oldMin = _minMaxValues[depentParameter].Item1;
             var oldMax = _minMaxValues[depentParameter].Item2;
 
-            if (dependentParametersMinSum - value < oldMin)
+            if (DependentParametersMinSum - value < oldMin)
             {
                 return new Tuple<int, int>(oldMin, oldMax);
             }
 
-            return new Tuple<int, int>(dependentParametersMinSum - value, oldMax);
+            return new Tuple<int, int>(DependentParametersMinSum - value, oldMax);
         }
     }
 

@@ -234,7 +234,7 @@ namespace orsapr
                 if (!_parameters.CheckDependentParametersValue())
                 {
                     SetError(LegsHeightTextBox, "Сумма толщины сиденья и длины ножки должна быть в диапазоне от" +
-                        $" {Parameters.dependentParametersMinSum} до \n{Parameters.dependentParametersMaxSum}.");
+                        $" {Parameters.DependentParametersMinSum} до \n{Parameters.DependentParametersMaxSum}.");
                     SetColors(SeatThicknessTextBox);
                 }
                 else

@@ -98,10 +98,10 @@ namespace API
                 part, 
                 "Эскиз: Ножка " + legNumber);
 
-
+            List<Tuple<int, int>> coords;
             if (parameters.SeatType == SeatTypes.SquareSeat)
             {
-                var coords = new List<Tuple<int, int>>
+                coords = new List<Tuple<int, int>>
                 {
                     new Tuple<int, int>(0, 0),
                     new Tuple<int, int>(
@@ -115,41 +115,11 @@ namespace API
                         parameters.SeatLength - parameters.LegWidth)
                 };
 
-                 //TODO: duplication
-                foreach (var point in coords)
-                {
-                    switch (parameters.LegsType)
-                    {
-                        case LegTypes.SquareLeg:
-                        {
-                            _wrapper.CreateRectangle(
-                                legSketch, 
-                                point.Item1, 
-                                point.Item2, 
-                                parameters.LegWidth, 
-                                parameters.LegWidth);
-                            break;
-                        }
-                        case LegTypes.RoundLeg:
-                        {
-                            _wrapper.CreateCircle(
-                                legSketch, 
-                                point.Item1 + parameters.LegWidth / 2, 
-                                point.Item2 + parameters.LegWidth / 2, 
-                                parameters.LegWidth);
-                            break;
-                        }
-                    }
-                    _wrapper.ExtrudeSketch(
-                        legSketch, 
-                        -parameters.LegLength, 
-                        "Элемент выдавливания: Ножка " + legNumber, 
-                        false);
-                }
+                 //TODO: duplication+
             }
-            else if (parameters.SeatType == SeatTypes.RoundSeat)
+            else
             {
-                var coords = new List<Tuple<int, int>>
+                coords = new List<Tuple<int, int>>
                 {
                     new Tuple<int, int>(
                         -parameters.SeatWidth / 2, 
@@ -165,37 +135,37 @@ namespace API
                         parameters.SeatLength / 2 - parameters.LegWidth)
                 };
 
-                 //TODO: duplication
-                foreach (var point in coords)
+                 //TODO: duplication+       
+            }
+            foreach (var point in coords)
+            {
+                switch (parameters.LegsType)
                 {
-                    switch (parameters.LegsType)
-                    {
-                        case LegTypes.SquareLeg:
+                    case LegTypes.SquareLeg:
                         {
                             _wrapper.CreateRectangle(
-                                legSketch, 
-                                point.Item1, 
-                                point.Item2, 
-                                parameters.LegWidth, 
+                                legSketch,
+                                point.Item1,
+                                point.Item2,
+                                parameters.LegWidth,
                                 parameters.LegWidth);
                             break;
                         }
-                        case LegTypes.RoundLeg:
+                    case LegTypes.RoundLeg:
                         {
                             _wrapper.CreateCircle(
-                                legSketch, 
-                                point.Item1 + parameters.LegWidth / 2, 
-                                point.Item2 + parameters.LegWidth / 2, 
+                                legSketch,
+                                point.Item1 + parameters.LegWidth / 2,
+                                point.Item2 + parameters.LegWidth / 2,
                                 parameters.LegWidth);
                             break;
                         }
-                    }
-                    _wrapper.ExtrudeSketch(
-                        legSketch, 
-                        -parameters.LegLength, 
-                        "Элемент выдавливания: Ножка " + legNumber, 
-                        false);
                 }
+                _wrapper.ExtrudeSketch(
+                    legSketch,
+                    -parameters.LegLength,
+                    "Элемент выдавливания: Ножка " + legNumber,
+                    false);
             }
         }
     }
